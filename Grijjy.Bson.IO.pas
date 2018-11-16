@@ -2985,9 +2985,9 @@ begin
   WriteNameHelper(Name);
   if (FSettings.OutputMode = TgoJsonOutputMode.Strict) then
   begin
-    FOutput.Append('{ "$date" : ');
+  //FOutput.Append('{ "$date" : ');
     FOutput.Append(AMillisecondsSinceEpoch);
-    FOutput.Append(' }');
+  //FOutput.Append(' }');
   end
   else
   begin
