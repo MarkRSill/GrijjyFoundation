@@ -20,7 +20,8 @@ uses
   Tests.Grijjy.Bson.IO in 'Tests\Tests.Grijjy.Bson.IO.pas',
   Tests.Grijjy.Bson.Serialization in 'Tests\Tests.Grijjy.Bson.Serialization.pas',
   Tests.Grijjy.ProtocolBuffers in 'Tests\Tests.Grijjy.ProtocolBuffers.pas',
-  Tests.Grijjy.PropertyBag in 'Tests\Tests.Grijjy.PropertyBag.pas';
+  Tests.Grijjy.PropertyBag in 'Tests\Tests.Grijjy.PropertyBag.pas',
+  TestInsight.DUnitX;
 
 var
   runner : ITestRunner;
