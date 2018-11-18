@@ -1898,9 +1898,12 @@ end;
 
 class function TgoBsonSerializer.DeserializeDateTime(const AInfo: TInfo;
   const AReader: IgoBsonBaseReader): TDateTime;
+const
+  UNIX_MS_RESOLUTION_THRESHOLD = 5000000000;
 var
   DT: TgoBsonDateTime;
   Name: String;
+  UnixDateTime: Int64;
 begin
   case AReader.GetCurrentBsonType of
     TgoBsonType.DateTime:
@@ -1926,7 +1929,20 @@ begin
       end;
 
     TgoBsonType.Int64:
-      Result := goDateTimeFromTicks(AReader.ReadInt64, True);
+    //Result := goDateTimeFromTicks(AReader.ReadInt64, True);
+      begin
+        UnixDateTime := AReader.ReadInt64;
+        if UnixDateTime < UNIX_MS_RESOLUTION_THRESHOLD then
+          Result := UnixToDateTime(UnixDateTime, True)
+        else
+          Result := goToDateTimeFromMillisecondsSinceEpoch(UnixDateTime, True);
+      end;
+
+    TgoBsonType.Int32:
+      begin
+        UnixDateTime := AReader.ReadInt32;
+        Result := UnixToDateTime(UnixDateTime, True);
+      end;
 
     TgoBsonType.String:
       Result := ISO8601ToDate(AReader.ReadString, True);
