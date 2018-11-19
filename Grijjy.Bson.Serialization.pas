@@ -1587,7 +1587,7 @@ end;
 
 constructor TgoBsonDefaultValue.Create(const AValue: String);
 begin
-  FRepresentation := TgoBsonRepresentation.String;
+  FRepresentation := TgoBsonRepresentation.&String;
   FAsString := AValue;
 end;
 
@@ -1657,7 +1657,7 @@ class procedure TgoBsonSerializer.CheckBooleanRepresentation(
 begin
   if (not (ARepresentation in [TgoBsonRepresentation.Boolean,
     TgoBsonRepresentation.Double, TgoBsonRepresentation.Int32,
-    TgoBsonRepresentation.Int64, TgoBsonRepresentation.String]))
+    TgoBsonRepresentation.Int64, TgoBsonRepresentation.&String]))
   then
     raise EgoBsonSerializerError.Create('Invalid Boolean representation');
 end;
@@ -1665,7 +1665,7 @@ end;
 class procedure TgoBsonSerializer.CheckCharRepresentation(
   const ARepresentation: TgoBsonRepresentation);
 begin
-  if (not (ARepresentation in [TgoBsonRepresentation.String,
+  if (not (ARepresentation in [TgoBsonRepresentation.&String,
     TgoBsonRepresentation.Int32, TgoBsonRepresentation.Int64]))
   then
     raise EgoBsonSerializerError.Create('Invalid Char representation');
@@ -1676,7 +1676,7 @@ class procedure TgoBsonSerializer.CheckDateTimeRepresentation(
 begin
   if (not (ARepresentation in [TgoBsonRepresentation.DateTime,
     TgoBsonRepresentation.Document, TgoBsonRepresentation.Int64,
-    TgoBsonRepresentation.String]))
+    TgoBsonRepresentation.&String]))
   then
     raise EgoBsonSerializerError.Create('Invalid date/time representation');
 end;
@@ -1685,7 +1685,7 @@ class procedure TgoBsonSerializer.CheckEnumRepresentation(
   const ARepresentation: TgoBsonRepresentation);
 begin
   if (not (ARepresentation in [TgoBsonRepresentation.Int32,
-    TgoBsonRepresentation.Int64, TgoBsonRepresentation.String]))
+    TgoBsonRepresentation.Int64, TgoBsonRepresentation.&String]))
   then
     raise EgoBsonSerializerError.Create('Invalid Enum representation');
 end;
@@ -1695,7 +1695,7 @@ class procedure TgoBsonSerializer.CheckFloatRepresentation(
 begin
   if (not (ARepresentation in [TgoBsonRepresentation.Double,
     TgoBsonRepresentation.Int32, TgoBsonRepresentation.Int64,
-    TgoBsonRepresentation.String]))
+    TgoBsonRepresentation.&String]))
   then
     raise EgoBsonSerializerError.Create('Invalid floating-point representation');
 end;
@@ -1704,7 +1704,7 @@ class procedure TgoBsonSerializer.CheckGuidRepresentation(
   const ARepresentation: TgoBsonRepresentation);
 begin
   if (not (ARepresentation in [TgoBsonRepresentation.Binary,
-    TgoBsonRepresentation.String]))
+    TgoBsonRepresentation.&String]))
   then
     raise EgoBsonSerializerError.Create('Invalid GUID representation');
 end;
@@ -1714,7 +1714,7 @@ class procedure TgoBsonSerializer.CheckIntegerRepresentation(
 begin
   if (not (ARepresentation in [TgoBsonRepresentation.Double,
     TgoBsonRepresentation.Int32, TgoBsonRepresentation.Int64,
-    TgoBsonRepresentation.String]))
+    TgoBsonRepresentation.&String]))
   then
     raise EgoBsonSerializerError.Create('Invalid Integer representation');
 end;
@@ -1723,7 +1723,7 @@ class procedure TgoBsonSerializer.CheckObjectIdRepresentation(
   const ARepresentation: TgoBsonRepresentation);
 begin
   if (not (ARepresentation in [TgoBsonRepresentation.ObjectId,
-    TgoBsonRepresentation.String]))
+    TgoBsonRepresentation.&String]))
   then
     raise EgoBsonSerializerError.Create('Invalid ObjectId representation');
 end;
@@ -1731,7 +1731,7 @@ end;
 class procedure TgoBsonSerializer.CheckStringRepresentation(
   const ARepresentation: TgoBsonRepresentation);
 begin
-  if (not (ARepresentation in [TgoBsonRepresentation.String,
+  if (not (ARepresentation in [TgoBsonRepresentation.&String,
     TgoBsonRepresentation.ObjectId, TgoBsonRepresentation.Symbol]))
   then
     raise EgoBsonSerializerError.Create('Invalid String representation');
@@ -1741,7 +1741,7 @@ class procedure TgoBsonSerializer.CheckTBytesRepresentation(
   const ARepresentation: TgoBsonRepresentation);
 begin
   if (not (ARepresentation in [TgoBsonRepresentation.Binary,
-    TgoBsonRepresentation.String]))
+    TgoBsonRepresentation.&String]))
   then
     raise EgoBsonSerializerError.Create('Invalid TBytes representation');
 end;
@@ -1751,7 +1751,7 @@ class procedure TgoBsonSerializer.CheckInt64Representation(
 begin
   if (not (ARepresentation in [TgoBsonRepresentation.Double,
     TgoBsonRepresentation.Int32, TgoBsonRepresentation.Int64,
-    TgoBsonRepresentation.String]))
+    TgoBsonRepresentation.&String]))
   then
     raise EgoBsonSerializerError.Create('Invalid Int64 representation');
 end;
@@ -1899,7 +1899,7 @@ end;
 class function TgoBsonSerializer.DeserializeDateTime(const AInfo: TInfo;
   const AReader: IgoBsonBaseReader): TDateTime;
 const
-  UNIX_MS_RESOLUTION_THRESHOLD = 5000000000;
+  UNIX_MS_RESOLUTION_THRESHOLD = 5000000000; // 5 billion milliseconds by 2/27/1970 20:53:20 Z
 var
   DT: TgoBsonDateTime;
   Name: String;
@@ -2446,7 +2446,7 @@ begin
     TgoBsonRepresentation.Int64:
       AWriter.WriteInt64(Ord(AValue));
 
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       if (AValue) then
         AWriter.WriteString('true')
       else
@@ -2466,7 +2466,7 @@ begin
     AWriter.WriteName(AInfo.Name);
 
   case AInfo.Representation of
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       AWriter.WriteString(AValue);
 
     TgoBsonRepresentation.Int32:
@@ -2510,7 +2510,7 @@ begin
     TgoBsonRepresentation.Int64:
       AWriter.WriteInt64(goDateTimeToTicks(AValue, True));
 
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       begin
         S := FormatDateTime('yyyy-mm-dd"T"hh:nn:ss', AValue, goUSFormatSettings);
         MS := MilliSecondOf(AValue);
@@ -2544,7 +2544,7 @@ begin
     TgoBsonRepresentation.Int64:
       AWriter.WriteInt64(Trunc(AValue));
 
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       begin
         S := FloatToStr(AValue, goUSFormatSettings);
         if (S = 'NAN') then
@@ -2576,7 +2576,7 @@ begin
     TgoBsonRepresentation.Int64:
       AWriter.WriteInt64(AValue);
 
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       begin
         if (Integer(AValue) <= AInfo.&Type.TypeData.MaxValue) then
           AWriter.WriteString(GetEnumName(AInfo.&Type, AValue))
@@ -2607,7 +2607,7 @@ begin
         AWriter.WriteBinaryData(V.AsBsonBinaryData);
       end;
 
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       begin
         S := AValue.ToString;
         S := S.Substring(1, S.Length - 2);
@@ -2637,7 +2637,7 @@ begin
     TgoBsonRepresentation.Int64:
       AWriter.WriteInt64(AValue);
 
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       AWriter.WriteString(IntToStr(AValue));
   else
     Assert(False);
@@ -2663,7 +2663,7 @@ begin
     TgoBsonRepresentation.Int64:
       AWriter.WriteInt64(AValue);
 
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       AWriter.WriteString(IntToStr(AValue));
   else
     Assert(False);
@@ -2705,7 +2705,7 @@ begin
     TgoBsonRepresentation.ObjectId:
       AWriter.WriteObjectId(AValue);
 
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       AWriter.WriteString(AValue.ToString);
   else
     Assert(False);
@@ -2744,7 +2744,7 @@ begin
     TgoBsonRepresentation.Int64:
       AWriter.WriteInt64(AValue);
 
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       begin
         if (AValue = 0) then
           AWriter.WriteString('')
@@ -2766,7 +2766,7 @@ begin
     AWriter.WriteName(AInfo.Name);
 
   case AInfo.Representation of
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       AWriter.WriteString(AValue);
 
     TgoBsonRepresentation.Symbol:
@@ -2792,7 +2792,7 @@ begin
     TgoBsonRepresentation.Binary:
       AWriter.WriteBytes(AValue);
 
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       AWriter.WriteString(goToHexString(AValue));
   else
     Assert(False);
@@ -2818,7 +2818,7 @@ begin
     TgoBsonRepresentation.Int64:
       AWriter.WriteInt64(AValue);
 
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       AWriter.WriteString(IntToStr(AValue));
   else
     Assert(False);
@@ -2844,7 +2844,7 @@ begin
     TgoBsonRepresentation.Int64:
       AWriter.WriteInt64(AValue);
 
-    TgoBsonRepresentation.String:
+    TgoBsonRepresentation.&String:
       AWriter.WriteString(UIntToStr(AValue));
   else
     Assert(False);
@@ -3995,7 +3995,7 @@ begin
         FSerializeProc := SerializeChar;
         FDeserializeProc := DeserializeChar;
         if (FRepresentation = TgoBsonRepresentation.Default) then
-          FRepresentation := TgoBsonRepresentation.String
+          FRepresentation := TgoBsonRepresentation.&String
         else
           CheckCharRepresentation(FRepresentation);
       end;
@@ -4005,7 +4005,7 @@ begin
         FSerializeProc := SerializeString;
         FDeserializeProc := DeserializeString;
         if (FRepresentation = TgoBsonRepresentation.Default) then
-          FRepresentation := TgoBsonRepresentation.String
+          FRepresentation := TgoBsonRepresentation.&String
         else
           CheckStringRepresentation(FRepresentation);
 
@@ -4013,9 +4013,9 @@ begin
         begin
           case FDefaultValue.FRepresentation of
             TgoBsonRepresentation.Default:
-              FDefaultValue.FRepresentation := TgoBsonRepresentation.String;
+              FDefaultValue.FRepresentation := TgoBsonRepresentation.&String;
 
-            TgoBsonRepresentation.String: ;
+            TgoBsonRepresentation.&String: ;
           else
             raise EgoBsonSerializerError.Create('Default value must be of a string type');
           end;
@@ -4611,6 +4611,17 @@ begin
 
         end
         else
+        if (AType = TypeInfo(TDate)) then
+        begin
+          FSerializeProc := SerializeDateTime;
+          FDeserializeProc := DeserializeDateTime;
+          if (FRepresentation = TgoBsonRepresentation.Default) then
+            FRepresentation := TgoBsonRepresentation.DateTime
+          else
+            CheckDateTimeRepresentation(FRepresentation);
+
+        end
+        else
         begin
           FSerializeProc := SerializeDouble;
           FDeserializeProc := DeserializeDouble;
@@ -4700,7 +4711,7 @@ begin
         FSerializeProc := SerializeChar;
         FDeserializeProc := DeserializeChar;
         if (FRepresentation = TgoBsonRepresentation.Default) then
-          FRepresentation := TgoBsonRepresentation.String
+          FRepresentation := TgoBsonRepresentation.&String
         else
           CheckCharRepresentation(FRepresentation);
       end;
@@ -4710,7 +4721,7 @@ begin
         FSerializeProc := SerializeString;
         FDeserializeProc := DeserializeString;
         if (FRepresentation = TgoBsonRepresentation.Default) then
-          FRepresentation := TgoBsonRepresentation.String
+          FRepresentation := TgoBsonRepresentation.&String
         else
           CheckStringRepresentation(FRepresentation);
 
@@ -4718,9 +4729,9 @@ begin
         begin
           case FDefaultValue.FRepresentation of
             TgoBsonRepresentation.Default:
-              FDefaultValue.FRepresentation := TgoBsonRepresentation.String;
+              FDefaultValue.FRepresentation := TgoBsonRepresentation.&String;
 
-            TgoBsonRepresentation.String: ;
+            TgoBsonRepresentation.&String: ;
           else
             raise EgoBsonSerializerError.Create('Default value must be of a string type');
           end;
