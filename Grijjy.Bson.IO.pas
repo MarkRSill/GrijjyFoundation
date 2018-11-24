@@ -2945,9 +2945,9 @@ begin
 
   if (FSettings.OutputMode = TgoJsonOutputMode.Strict) then
   begin
-    FOutput.Append('{ "$binary" : "');
+    FOutput.Append('{"$binary":"');
     FOutput.Append(TEncoding.ANSI.GetString(goBase64Encode(Bytes)));
-    FOutput.AppendFormat('", "$type" : "%.2x" }', [Ord(SubType)]);
+    FOutput.AppendFormat('","$type":"%.2x"}', [Ord(SubType)]);
   end
   else if (SubType in [TgoBsonBinarySubType.UuidLegacy, TgoBsonBinarySubType.UuidStandard]) then
     FOutput.Append(GuidToString(Bytes, SubType))
@@ -2955,7 +2955,7 @@ begin
   begin
     FOutput.Append('new BinData(');
     FOutput.Append(Ord(SubType));
-    FOutput.Append(', "');
+    FOutput.Append(',"');
     FOutput.Append(TEncoding.ANSI.GetString(goBase64Encode(Bytes)));
     FOutput.Append('")');
   end;
@@ -3066,7 +3066,7 @@ begin
     FOutput.Append('}');
   end
   else
-    FOutput.Append(' }');
+    FOutput.Append('}');
 
   if (FContext.ContextType = TgoBsonContextType.ScopeDocument) then
   begin
@@ -3158,9 +3158,9 @@ begin
     raise EInvalidOperation.CreateRes(@RS_BSON_INVALID_WRITER_STATE);
 
   WriteNameHelper(Name);
-  FOutput.Append('{ "$code" : "');
+  FOutput.Append('{"$code":"');
   WriteEscapedString(ACode);
-  FOutput.Append('" }');
+  FOutput.Append('"}');
   State := GetNextState;
 end;
 
@@ -3185,7 +3185,7 @@ begin
   WriteNameHelper(Name);
 
   if (FSettings.OutputMode = TgoJsonOutputMode.Strict) then
-    FOutput.Append('{ "$maxKey" : 1 }')
+    FOutput.Append('{"$maxKey":1}')
   else
     FOutput.Append('MaxKey');
 
@@ -3200,7 +3200,7 @@ begin
   WriteNameHelper(Name);
 
   if (FSettings.OutputMode = TgoJsonOutputMode.Strict) then
-    FOutput.Append('{ "$minKey" : 1 }')
+    FOutput.Append('{"$minKey":1}')
   else
     FOutput.Append('MinKey');
 
@@ -3214,7 +3214,7 @@ begin
     TgoBsonContextType.&Array:
       begin
         if (FContext.HasElements) then
-          FOutput.Append(', ');
+          FOutput.Append(',');
       end;
 
     TgoBsonContextType.Document,
@@ -3227,12 +3227,10 @@ begin
         begin
           FOutput.Append(FSettings.LineBreak);
           FOutput.Append(FContext.Indentation);
-        end
-        else
-          FOutput.Append(' ');
+        end;
 
         WriteQuotedString(AName);
-        FOutput.Append(' : ');
+        FOutput.Append(':');
       end;
 
     TgoBsonContextType.TopLevel: ;
@@ -3261,7 +3259,7 @@ begin
 
   if (FSettings.OutputMode = TgoJsonOutputMode.Strict) then
   begin
-    FOutput.Append('{ "$oid" : "');
+    FOutput.Append('{"$oid":"');
     FOutput.Append(AValue.ToString);
     FOutput.Append('" }');
   end
@@ -3302,11 +3300,11 @@ begin
 
   if (FSettings.OutputMode = TgoJsonOutputMode.Strict) then
   begin
-    FOutput.Append('{ "$regex" : "');
+    FOutput.Append('{"$regex":"');
     WriteEscapedString(Pattern);
-    FOutput.Append('", "$options" : "');
+    FOutput.Append('","$options":"');
     WriteEscapedString(Options);
-    FOutput.Append('" }');
+    FOutput.Append('"}');
   end
   else
   begin
@@ -3373,9 +3371,9 @@ begin
 
   WriteNameHelper(Name);
 
-  FOutput.Append('{ "$symbol" : "');
+  FOutput.Append('{"$symbol":"');
   WriteEscapedString(AValue);
-  FOutput.Append('" }');
+  FOutput.Append('"}');
 
   State := GetNextState;
 end;
@@ -3394,17 +3392,17 @@ begin
 
   if (FSettings.OutputMode = TgoJsonOutputMode.Strict) then
   begin
-    FOutput.Append('{ "$timestamp" : { "t" : ');
+    FOutput.Append('{"$timestamp":{"t":');
     FOutput.Append(SecondsSinceEpoch);
-    FOutput.Append(', "i" : ');
+    FOutput.Append(',"i":');
     FOutput.Append(Increment);
-    FOutput.Append(' } }');
+    FOutput.Append('}}');
   end
   else
   begin
     FOutput.Append('Timestamp(');
     FOutput.Append(SecondsSinceEpoch);
-    FOutput.Append(', ');
+    FOutput.Append(',');
     FOutput.Append(Increment);
     FOutput.Append(')');
   end;
@@ -3420,7 +3418,7 @@ begin
   WriteNameHelper(Name);
 
   if (FSettings.OutputMode = TgoJsonOutputMode.Strict) then
-    FOutput.Append('{ "$undefined" : true }')
+    FOutput.Append('{"$undefined":true }')
   else
     FOutput.Append('undefined');
 
