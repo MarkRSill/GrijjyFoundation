@@ -3091,7 +3091,7 @@ begin
   begin
     C := AValue[I];
     case C of
-      '"', '\':
+      '"', '\', '/': // RS Added forward slash to escaped output as it's more acceptable from .NET services
         begin
           FOutput.Append('\');
           FOutput.Append(C);
