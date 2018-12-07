@@ -1946,6 +1946,12 @@ begin
 
     TgoBsonType.String:
       Result := ISO8601ToDate(AReader.ReadString, True);
+
+    TgoBsonType.Null:
+      begin
+        Result := 0;
+        AReader.ReadNull;
+      end
   else
     raise EgoBsonSerializerError.Create('Unsupported TDateTime deserialization type');
   end;
