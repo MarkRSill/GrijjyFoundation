@@ -1898,12 +1898,26 @@ end;
 
 class function TgoBsonSerializer.DeserializeDateTime(const AInfo: TInfo;
   const AReader: IgoBsonBaseReader): TDateTime;
+
+  function FixRSP16513(const aDateString: string): string;
+  var
+    offset: Integer;
+  begin
+    Result := aDateString;
+    offset := Result.IndexOf('.999') + 4;
+    if offset > 4 then
+      while (Result.Length > offset) and CharInSet(Result.Chars[offset], ['0'..'9']) do
+        Delete(Result, offset + 1, 1);
+  //Caption := FixRSP16513('2019-01-03T21:41:11.9995678+00:00'); = 2019-01-03T21:41:11.999+00:00
+  end;
+
 const
   UNIX_MS_RESOLUTION_THRESHOLD = 5000000000; // 5 billion milliseconds by 2/27/1970 20:53:20 Z
 var
   DT: TgoBsonDateTime;
   Name: String;
   UnixDateTime: Int64;
+  DateString: string;
 begin
   case AReader.GetCurrentBsonType of
     TgoBsonType.DateTime:
@@ -1945,8 +1959,15 @@ begin
       end;
 
     TgoBsonType.String:
-      Result := ISO8601ToDate(AReader.ReadString, True);
-
+      begin
+        DateString := AReader.ReadString;
+        try
+          Result := ISO8601ToDate(DateString, True);
+        except
+          on e: EConvertError do
+            Result := ISO8601ToDate(FixRSP16513(DateString), True);
+        end;
+      end;
     TgoBsonType.Null:
       begin
         Result := 0;
