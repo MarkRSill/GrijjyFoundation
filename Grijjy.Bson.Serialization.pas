@@ -1867,6 +1867,11 @@ begin
 
     TgoBsonType.String:
       Result := SameText(AReader.ReadString, 'true');
+
+    TgoBsonType.Null: begin
+      Result := False;
+      AReader.ReadNull;
+    end;
   else
     raise EgoBsonSerializerError.Create('Unsupported Boolean deserialization type');
   end;
@@ -1891,6 +1896,11 @@ begin
 
     TgoBsonType.Int64:
       Result := Chr(AReader.ReadInt64);
+
+    TgoBsonType.Null: begin
+      Result := Chr(0);
+      AReader.ReadNull;
+    end;
   else
     raise EgoBsonSerializerError.Create('Unsupported Char deserialization type');
   end;
@@ -1968,11 +1978,12 @@ begin
             Result := ISO8601ToDate(FixRSP16513(DateString), True);
         end;
       end;
+
     TgoBsonType.Null:
       begin
         Result := 0;
         AReader.ReadNull;
-      end
+      end;
   else
     raise EgoBsonSerializerError.Create('Unsupported TDateTime deserialization type');
   end;
@@ -2004,7 +2015,12 @@ begin
           Result := Double.NegativeInfinity
         else
           Result := StrToFloat(S, goUSFormatSettings);
-      end
+      end;
+
+    TgoBsonType.Null: begin
+      Result := 0;
+      AReader.ReadNull;
+    end;
   else
     raise EgoBsonSerializerError.Create('Unsupported Double deserialization type');
   end;
@@ -2027,7 +2043,12 @@ begin
         S := AReader.ReadString;
         if (not TryStrToInt(S, Integer(Result))) then
           Result := GetEnumValue(AInfo.&Type, S);
-      end
+      end;
+
+    TgoBsonType.Null: begin
+      Result := 0;
+      AReader.ReadNull;
+    end;
   else
     raise EgoBsonSerializerError.Create('Unsupported Enum deserialization type');
   end;
@@ -2046,7 +2067,12 @@ begin
       end;
 
     TgoBsonType.String:
-      Result := TGUID.Create('{' + AReader.ReadString + '}')
+      Result := TGUID.Create('{' + AReader.ReadString + '}');
+
+    TgoBsonType.Null: begin
+      Result := TGUID.Empty;
+      AReader.ReadNull;
+    end;
   else
     raise EgoBsonSerializerError.Create('Unsupported GUID deserialization type');
   end;
@@ -2067,6 +2093,11 @@ begin
 
     TgoBsonType.String:
       Result := StrToInt(AReader.ReadString);
+
+    TgoBsonType.Null: begin
+      Result := 0;
+      AReader.ReadNull;
+    end
   else
     raise EgoBsonSerializerError.Create('Unsupported Int32 deserialization type');
   end;
@@ -2087,6 +2118,11 @@ begin
 
     TgoBsonType.String:
       Result := StrToInt64(AReader.ReadString);
+
+    TgoBsonType.Null: begin
+      Result := 0;
+      AReader.ReadNull;
+    end;
   else
     raise EgoBsonSerializerError.Create('Unsupported Int64 deserialization type');
   end;
@@ -2159,7 +2195,12 @@ begin
           Result := 0
         else
           Result := StringToSet(AInfo.&Type, S);
-      end
+      end;
+
+    TgoBsonType.Null: begin
+      Result := 0;
+      AReader.ReadNull;
+    end;
   else
     raise EgoBsonSerializerError.Create('Unsupported Set deserialization type');
   end;
@@ -2197,6 +2238,11 @@ begin
 
     TgoBsonType.String:
       Result := goParseHexString(AReader.ReadString);
+
+    TgoBsonType.Null: begin
+      Result := goParseHexString('');
+      AReader.ReadNull;
+    end;
   else
     raise EgoBsonSerializerError.Create('Unsupported TBytes deserialization type');
   end;
@@ -2217,6 +2263,11 @@ begin
 
     TgoBsonType.String:
       Result := StrToInt64(AReader.ReadString);
+
+    TgoBsonType.Null: begin
+      Result := 0;
+      AReader.ReadNull;
+    end;
   else
     raise EgoBsonSerializerError.Create('Unsupported UInt32 deserialization type');
   end;
@@ -2237,6 +2288,11 @@ begin
 
     TgoBsonType.String:
       Result := StrToUInt64(AReader.ReadString);
+
+    TgoBsonType.Null: begin
+      Result := 0;
+      AReader.ReadNull;
+    end;
   else
     raise EgoBsonSerializerError.Create('Unsupported UInt32 deserialization type');
   end;
