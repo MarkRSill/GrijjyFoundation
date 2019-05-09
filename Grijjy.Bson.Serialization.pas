@@ -1972,7 +1972,10 @@ begin
       begin
         DateString := AReader.ReadString;
         try
-          Result := ISO8601ToDate(DateString, True);
+          if DateString > '' then
+            Result := ISO8601ToDate(DateString, True)
+          else
+            Result := 0; // Blank string is null date
         except
           on e: EConvertError do
             Result := ISO8601ToDate(FixRSP16513(DateString), True);
