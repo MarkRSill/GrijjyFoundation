@@ -807,6 +807,10 @@ type
         const AAddress: Pointer; const AWriter: IgoBsonBaseWriter); static;
       class procedure DeserializeDateTime(const AVar: TVarInfo;
         const AAddress: Pointer; const AReader: IgoBsonBaseReader); static;
+      class procedure SerializeDateOnly(const AVar: TVarInfo;
+        const AAddress: Pointer; const AWriter: IgoBsonBaseWriter); static;
+      class procedure DeserializeDateOnly(const AVar: TVarInfo;
+        const AAddress: Pointer; const AReader: IgoBsonBaseReader); static;
       class procedure SerializeGuid(const AVar: TVarInfo;
         const AAddress: Pointer; const AWriter: IgoBsonBaseWriter); static;
       class procedure DeserializeGuid(const AVar: TVarInfo;
@@ -923,6 +927,10 @@ type
       class procedure SerializeDateTime(const AProp: TPropertyInfo;
         const AInstance: TObject; const AWriter: IgoBsonBaseWriter); static;
       class procedure DeserializeDateTime(const AProp: TPropertyInfo;
+        const AInstance: TObject; const AReader: IgoBsonBaseReader); static;
+      class procedure SerializeDateOnly(const AProp: TPropertyInfo;
+        const AInstance: TObject; const AWriter: IgoBsonBaseWriter); static;
+      class procedure DeserializeDateOnly(const AProp: TPropertyInfo;
         const AInstance: TObject; const AReader: IgoBsonBaseReader); static;
       class procedure SerializeGuid(const AProp: TPropertyInfo;
         const AInstance: TObject; const AWriter: IgoBsonBaseWriter); static;
@@ -1100,6 +1108,10 @@ type
       const AValue: TDateTime; const AWriter: IgoBsonBaseWriter); static;
     class function DeserializeDateTime(const AInfo: TInfo;
       const AReader: IgoBsonBaseReader): TDateTime; static;
+    class procedure SerializeDateOnly(const AInfo: TInfo;
+      const AValue: TDate; const AWriter: IgoBsonBaseWriter); static;
+    class function DeserializeDateOnly(const AInfo: TInfo;
+      const AReader: IgoBsonBaseReader): TDate; static;
     class procedure SerializeGuid(const AInfo: TInfo;
       const AValue: TGUID; const AWriter: IgoBsonBaseWriter); static;
     class function DeserializeGuid(const AInfo: TInfo;
@@ -1992,6 +2004,92 @@ begin
   end;
 end;
 
+class function TgoBsonSerializer.DeserializeDateOnly(const AInfo: TInfo;
+  const AReader: IgoBsonBaseReader): TDate;
+
+  function FixRSP16513(const aDateString: string): string;
+  var
+    offset: Integer;
+  begin
+    Result := aDateString;
+    offset := Result.IndexOf('.999') + 4;
+    if offset > 4 then
+      while (Result.Length > offset) and CharInSet(Result.Chars[offset], ['0'..'9']) do
+        Delete(Result, offset + 1, 1);
+  //Caption := FixRSP16513('2019-01-03T21:41:11.9995678+00:00'); = 2019-01-03T21:41:11.999+00:00
+  end;
+
+const
+  UNIX_MS_RESOLUTION_THRESHOLD = 5000000000; // 5 billion milliseconds by 2/27/1970 20:53:20 Z
+var
+  DT: TgoBsonDateTime;
+  Name: String;
+  UnixDateTime: Int64;
+  DateString: string;
+begin
+  case AReader.GetCurrentBsonType of
+    TgoBsonType.DateTime:
+      begin
+        DT := TgoBsonDateTime.Create(AReader.ReadDateTime);
+        Result := DateOf(DT.ToUniversalTime);
+      end;
+
+    TgoBsonType.Document:
+      begin
+        Result := 0;
+        AReader.ReadStartDocument;
+        while (AReader.ReadBsonType <> TgoBsonType.EndOfDocument) do
+        begin
+          Name := AReader.ReadName;
+          if (Name = 'DateTime') then
+            // Ignore (use Ticks instead)
+            AReader.SkipValue
+          else if (Name = 'Ticks') then
+            Result := DateOf(goDateTimeFromTicks(AReader.ReadInt64, True));
+        end;
+        AReader.ReadEndDocument;
+      end;
+
+    TgoBsonType.Int64:
+    //Result := goDateTimeFromTicks(AReader.ReadInt64, True);
+      begin
+        UnixDateTime := AReader.ReadInt64;
+        if UnixDateTime < UNIX_MS_RESOLUTION_THRESHOLD then
+          Result := DateOf(UnixToDateTime(UnixDateTime, True))
+        else
+          Result := DateOf(goToDateTimeFromMillisecondsSinceEpoch(UnixDateTime, True));
+      end;
+
+    TgoBsonType.Int32:
+      begin
+        UnixDateTime := AReader.ReadInt32;
+        Result := DateOf(UnixToDateTime(UnixDateTime, True));
+      end;
+
+    TgoBsonType.String:
+      begin
+        DateString := AReader.ReadString;
+        try
+          if DateString > '' then
+            Result := DateOf(ISO8601ToDate(DateString, True))
+          else
+            Result := 0; // Blank string is null date
+        except
+          on e: EConvertError do
+            Result := DateOf(ISO8601ToDate(FixRSP16513(DateString), True));
+        end;
+      end;
+
+    TgoBsonType.Null:
+      begin
+        Result := 0;
+        AReader.ReadNull;
+      end;
+  else
+    raise EgoBsonSerializerError.Create('Unsupported TDateTime deserialization type');
+  end;
+end;
+
 class function TgoBsonSerializer.DeserializeDouble(const AInfo: TInfo;
   const AReader: IgoBsonBaseReader): Double;
 var
@@ -2602,6 +2700,47 @@ begin
         MS := MilliSecondOf(AValue);
         if (MS <> 0) then
           S := S + '.' + IntToStr(MS * 10000);
+        AWriter.WriteString(S);
+      end
+  else
+    Assert(False);
+  end;
+end;
+
+class procedure TgoBsonSerializer.SerializeDateOnly(const AInfo: TInfo;
+  const AValue: TDate; const AWriter: IgoBsonBaseWriter);
+var
+  MS: Int64;
+  S: String;
+begin
+  if (AInfo.IgnoreIfDefault) and (AValue = 0) then
+    Exit;
+
+  if (AInfo.Name <> '') then
+    AWriter.WriteName(AInfo.Name);
+
+  case AInfo.Representation of
+    TgoBsonRepresentation.DateTime:
+      begin
+        MS := goDateTimeToMillisecondsSinceEpoch(AValue, True);
+        AWriter.WriteDateTime(MS);
+      end;
+
+    TgoBsonRepresentation.Document:
+      begin
+        MS := goDateTimeToMillisecondsSinceEpoch(AValue, True);
+        AWriter.WriteStartDocument;
+        AWriter.WriteDateTime('DateTime', MS);
+        AWriter.WriteInt64('Ticks', goDateTimeToTicks(AValue, True));
+        AWriter.WriteEndDocument;
+      end;
+
+    TgoBsonRepresentation.Int64:
+      AWriter.WriteInt64(goDateTimeToTicks(AValue, True));
+
+    TgoBsonRepresentation.&String:
+      begin
+        S := FormatDateTime('yyyy-mm-dd', AValue, goUSFormatSettings);
         AWriter.WriteString(S);
       end
   else
@@ -3674,6 +3813,13 @@ begin
   PDateTime(AAddress)^ := TgoBsonSerializer.DeserializeDateTime(AVar, AReader);
 end;
 
+class procedure TgoBsonSerializer.TVarInfo.DeserializeDateOnly(
+  const AVar: TVarInfo; const AAddress: Pointer;
+  const AReader: IgoBsonBaseReader);
+begin
+  PDateTime(AAddress)^ := TgoBsonSerializer.DeserializeDateOnly(AVar, AReader);
+end;
+
 class procedure TgoBsonSerializer.TVarInfo.DeserializeDouble(
   const AVar: TVarInfo; const AAddress: Pointer;
   const AReader: IgoBsonBaseReader);
@@ -4203,6 +4349,13 @@ begin
   TgoBsonSerializer.SerializeDateTime(AVar, PDateTime(AAddress)^, AWriter);
 end;
 
+class procedure TgoBsonSerializer.TVarInfo.SerializeDateOnly(
+  const AVar: TVarInfo; const AAddress: Pointer;
+  const AWriter: IgoBsonBaseWriter);
+begin
+  TgoBsonSerializer.SerializeDateOnly(AVar, PDateTime(AAddress)^, AWriter);
+end;
+
 class procedure TgoBsonSerializer.TVarInfo.SerializeDouble(
   const AVar: TVarInfo; const AAddress: Pointer;
   const AWriter: IgoBsonBaseWriter);
@@ -4490,6 +4643,13 @@ begin
   SetFloatProp(AInstance, AProp.Info, TgoBsonSerializer.DeserializeDateTime(AProp, AReader));
 end;
 
+class procedure TgoBsonSerializer.TPropertyInfo.DeserializeDateOnly(
+  const AProp: TPropertyInfo; const AInstance: TObject;
+  const AReader: IgoBsonBaseReader);
+begin
+  SetFloatProp(AInstance, AProp.Info, TgoBsonSerializer.DeserializeDateOnly(AProp, AReader));
+end;
+
 class procedure TgoBsonSerializer.TPropertyInfo.DeserializeDouble(
   const AProp: TPropertyInfo; const AInstance: TObject;
   const AReader: IgoBsonBaseReader);
@@ -4699,8 +4859,8 @@ begin
         else
         if (AType = TypeInfo(TDate)) then
         begin
-          FSerializeProc := SerializeDateTime;
-          FDeserializeProc := DeserializeDateTime;
+          FSerializeProc := SerializeDateOnly;
+          FDeserializeProc := DeserializeDateOnly;
           if (FRepresentation = TgoBsonRepresentation.Default) then
             FRepresentation := TgoBsonRepresentation.DateTime
           else
@@ -4922,6 +5082,13 @@ class procedure TgoBsonSerializer.TPropertyInfo.SerializeDateTime(
   const AWriter: IgoBsonBaseWriter);
 begin
   TgoBsonSerializer.SerializeDateTime(AProp, GetFloatProp(AInstance, AProp.Info), AWriter);
+end;
+
+class procedure TgoBsonSerializer.TPropertyInfo.SerializeDateOnly(
+  const AProp: TPropertyInfo; const AInstance: TObject;
+  const AWriter: IgoBsonBaseWriter);
+begin
+  TgoBsonSerializer.SerializeDateOnly(AProp, GetFloatProp(AInstance, AProp.Info), AWriter);
 end;
 
 class procedure TgoBsonSerializer.TPropertyInfo.SerializeDouble(
