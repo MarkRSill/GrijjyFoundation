@@ -1592,7 +1592,7 @@ var
   A: TgoBsonArray;
 begin
   A := TgoBsonArray.Create([1, 2]);
-  Assert.AreEqual('[1, 2]', A.ToJson);
+  Assert.AreEqual('[1,2]', A.ToJson);
 end;
 
 procedure TTestBsonDocument.TestAddDocumentWithNestedDocument;
@@ -1606,7 +1606,7 @@ begin
   D := TgoBsonDocument.Create;
   D.Add('A', 1);
   D.Add('B', Nested);
-  Assert.AreEqual('{ "A" : 1, "B" : { "C" : 2, "D" : 3 } }', D.ToJson);
+  Assert.AreEqual('{"A":1,"B":{"C":2,"D":3}}', D.ToJson);
 end;
 
 procedure TTestBsonDocument.TestAddDocumentWithOneEntry;
@@ -1614,7 +1614,7 @@ var
   D: TgoBsonDocument;
 begin
   D := TgoBsonDocument.Create('A', 1);
-  Assert.AreEqual('{ "A" : 1 }', D.ToJson);
+  Assert.AreEqual('{"A":1}', D.ToJson);
 end;
 
 procedure TTestBsonDocument.TestAddDocumentWithTwoEntries;
@@ -1624,7 +1624,7 @@ begin
   D := TgoBsonDocument.Create;
   D.Add('A', 1);
   D.Add('B', 2);
-  Assert.AreEqual('{ "A" : 1, "B" : 2 }', D.ToJson);
+  Assert.AreEqual('{"A":1,"B":2}', D.ToJson);
 end;
 
 procedure TTestBsonDocument.TestAutoIndexing;
@@ -1720,7 +1720,7 @@ begin
   Assert.AreEqual(0, D.Count);
   Assert.IsFalse(V.IsBsonArray);
   Assert.IsTrue(V.IsBsonDocument);
-  Assert.AreEqual('{ }', D.ToJson);
+  Assert.AreEqual('{}', D.ToJson);
 end;
 
 procedure TTestBsonDocument.TestContains;
@@ -1892,7 +1892,7 @@ var
   D: TgoBsonDocument;
 begin
   D := TgoBsonDocument.Parse('{ a : 1, b : ''abc'' }');
-  Assert.AreEqual('{ "a" : 1, "b" : "abc" }', D.ToJson);
+  Assert.AreEqual('{"a":1,"b":"abc"}', D.ToJson);
 end;
 
 procedure TTestBsonDocument.TestRemove;
