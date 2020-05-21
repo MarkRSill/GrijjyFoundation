@@ -70,6 +70,8 @@ function goDateTimeToTicks(const AValue: TDateTime;
 function goDateTimeFromTicks(const AValue: Int64;
   const AReturnUTC: Boolean): TDateTime;
 
+function goDateTimeLocalToUTC(const AValue: TDateTime): TDateTime;
+
 implementation
 
 uses
@@ -129,6 +131,11 @@ begin
   Result := UTC_MIDNIGHT_JAN_0001 + Timespan;
   if (not AReturnUTC) then
     Result := TTimeZone.Local.ToLocalTime(Result);
+end;
+
+function goDateTimeLocalToUTC(const AValue: TDateTime): TDateTime;
+begin
+  Result := TTimeZone.Local.ToUniversalTime(AValue);
 end;
 
 end.
