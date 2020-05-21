@@ -1,22 +1,22 @@
 unit Grijjy.CloudLogging.InstanceTracker;
 
-{ When using this unit in DEBUG mode, instances of most classes will be tracked
-  for reporting to the Grijjy Log Viewer.
+{ When using this unit with TRACK_MEMORY defined, instances of most classes will
+  be tracked for reporting to the Grijjy Log Viewer.
 
   For most accurate results, it is recommended to put this unit at the top of
   the uses-clause of the project (.dpr) file.
 
-  In RELEASE mode, this unit does nothing and has no impact on the application
-  whatsoever.
+  When TRACK_MEMORY is *not* defined, this unit does nothing and has no impact
+  on the application whatsoever.
 
-  Note that using this unit in DEBUG mode may slow down the application a bit
-  and consume extra memory. }
+  Note that using this unit with TRACK_MEMORY defined may slow down the
+  application a bit and consume extra memory. }
 
 interface
 
 implementation
 
-{$IFDEF DEBUG}
+{$IFDEF TRACK_MEMORY}
 
 uses
   System.Rtti,
@@ -348,8 +348,11 @@ begin
       for Pair in Counts do
       begin
         Assert(Count < Length(Msg.Protocol.Entries));
-        Msg.Protocol.Entries[Count].ClassName := Pair.Key.ClassName;
-        Msg.Protocol.Entries[Count].ClassHandle := THandle(Pair.Key);
+        if Assigned(Pair.Key) then
+        begin
+          Msg.Protocol.Entries[Count].ClassName := Pair.Key.ClassName;
+          Msg.Protocol.Entries[Count].ClassHandle := THandle(Pair.Key);
+        end;
         Msg.Protocol.Entries[Count].InstanceCount := Pair.Value;
 
         if (DetailClasses.TryGetValue(Pair.Key, DetailInstances)) then
@@ -390,5 +393,5 @@ initialization
 finalization
   FinalizeGlobals;
 
-{$ENDIF !DEBUG}
+{$ENDIF !TRACK_MEMORY}
 end.

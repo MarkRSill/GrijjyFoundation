@@ -656,6 +656,11 @@ type
   end;
 
 type
+  { Apply this attribute to TDateTime elements you want to auto convert to UTC on serialize or localize on deserialization.}
+  BsonDateTimeAsUTCAttribute = class(TCustomAttribute)
+  end;
+
+type
   { Changes the representation type of an element when serializing. For example,
     this can be used to serialize Integer elements as Strings. }
   BsonRepresentationAttribute = class(TCustomAttribute)
@@ -726,6 +731,7 @@ type
       FHasDefaultValue: Boolean;
       FIgnoreIfDefault: Boolean;
       FIsProperty: Boolean;
+      FDateTimeAsUTC: Boolean;
     public
       property Name: String read FName;
       property &Type: PTypeInfo read FType;
@@ -734,6 +740,7 @@ type
       property DefaultValue: TgoBsonDefaultValue read FDefaultValue;
       property IgnoreIfDefault: Boolean read FIgnoreIfDefault;
       property Serializer: TSerializer read FSerializer;
+      property DateTimeAsUTC: Boolean read FDateTimeAsUTC;
     end;
   private type
     TVarInfo = class;
@@ -1940,6 +1947,7 @@ var
   Name: String;
   UnixDateTime: Int64;
   DateString: string;
+  returnLocal: boolean;
 begin
   case AReader.GetCurrentBsonType of
     TgoBsonType.DateTime:
@@ -1984,13 +1992,15 @@ begin
       begin
         DateString := AReader.ReadString;
         try
+          returnLocal := not AInfo.DateTimeAsUTC;
+
           if DateString > '' then
-            Result := ISO8601ToDate(DateString, True)
+            Result := ISO8601ToDate(DateString, returnLocal{True})
           else
             Result := 0; // Blank string is null date
         except
           on e: EConvertError do
-            Result := ISO8601ToDate(FixRSP16513(DateString), True);
+            Result := ISO8601ToDate(FixRSP16513(DateString), returnLocal{True});
         end;
       end;
 
@@ -2695,11 +2705,18 @@ begin
       AWriter.WriteInt64(goDateTimeToTicks(AValue, True));
 
     TgoBsonRepresentation.&String:
-      begin
-        S := FormatDateTime('yyyy-mm-dd"T"hh:nn:ss', AValue, goUSFormatSettings);
+      if AValue = 0 then
+        AWriter.WriteString('')
+      else begin
+        if AInfo.DateTimeAsUTC then
+          S := FormatDateTime('yyyy-mm-dd"T"hh:nn:ss', goDateTimeLocalToUTC(AValue), goUSFormatSettings)
+        else
+          S := FormatDateTime('yyyy-mm-dd"T"hh:nn:ss', AValue, goUSFormatSettings);
         MS := MilliSecondOf(AValue);
         if (MS <> 0) then
           S := S + '.' + IntToStr(MS * 10000);
+        if AInfo.DateTimeAsUTC then
+          S := S + 'Z';
         AWriter.WriteString(S);
       end
   else
@@ -3697,28 +3714,35 @@ begin
   ElementSize := FElementSize;
   ElementInfo := FElementInfo;
   ElementDeserializeProc := ElementInfo.DeserializeProc;
-  while (AReader.ReadBsonType <> TgoBsonType.EndOfDocument) do
-  begin
-    if (Count >= Capacity) then
+  try
+    while (AReader.ReadBsonType <> TgoBsonType.EndOfDocument) do
     begin
-      if (Capacity > 64) then
-        Inc(Capacity, Capacity div 4)
-      else if (Capacity > 8) then
-        Inc(Capacity, 16)
-      else
-        Inc(Capacity, 4);
-      DynArraySetLength(Result, FTypeInfo, 1, @Capacity);
-      Element := PByte(Result) + (Count * ElementSize);
+      if (Count >= Capacity) then
+      begin
+        if (Capacity > 64) then
+          Inc(Capacity, Capacity div 4)
+        else if (Capacity > 8) then
+          Inc(Capacity, 16)
+        else
+          Inc(Capacity, 4);
+        DynArraySetLength(Result, FTypeInfo, 1, @Capacity);
+        Element := PByte(Result) + (Count * ElementSize);
+      end;
+
+      Inc(Count);
+      ElementDeserializeProc(ElementInfo, Element, AReader);
+      Inc(Element, ElementSize);
     end;
+    if (Count > 0) then
+      DynArraySetLength(Result, FTypeInfo, 1, @Count);
 
-    Inc(Count);
-    ElementDeserializeProc(ElementInfo, Element, AReader);
-    Inc(Element, ElementSize);
+    AReader.ReadEndArray;
+  except
+    { Issue #32: clear array in case of exception }
+    if (Result <> nil) then
+      DynArrayClear(Result, FTypeInfo);
+    raise;
   end;
-  if (Count > 0) then
-    DynArraySetLength(Result, FTypeInfo, 1, @Count);
-
-  AReader.ReadEndArray;
 end;
 
 destructor TgoBsonSerializer.TArraySerializer.Destroy;
@@ -4534,6 +4558,8 @@ begin
       FRepresentation := RepresentationAttribute.Representation
     else if (Attr is BsonIgnoreIfDefaultAttribute) then
       FIgnoreIfDefault := True
+    else if (Attr is BsonDateTimeAsUTCAttribute) then
+      FDateTimeAsUTC := True
     else if (Attr is BsonDefaultValueAttribute) then
     begin
       FDefaultValue := DefaultValueAttribute.DefaultValue;
@@ -4583,6 +4609,8 @@ begin
       FRepresentation := BsonRepresentationAttribute(Attr).Representation
     else if (Attr is BsonIgnoreIfDefaultAttribute) then
       FIgnoreIfDefault := True
+    else if (Attr is BsonDateTimeAsUTCAttribute) then
+      FDateTimeAsUTC := True
     else if (Attr is BsonDefaultValueAttribute) then
     begin
       FDefaultValue := DefaultValueAttribute.DefaultValue;

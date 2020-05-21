@@ -465,7 +465,7 @@ end;
 
 procedure TestBsonReader.TestBookmark;
 const
-  JSON = '{ "x" : 1, "y" : 2 }';
+  JSON = '{"x":1,"y":2}';
 var
   Doc: TgoBsonDocument;
   Bson: TBytes;
@@ -684,7 +684,7 @@ end;
 
 procedure TestJsonReader.TestArrayTwoElements;
 const
-  JSON = '[1, 2]';
+  JSON = '[1,2]';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -733,7 +733,7 @@ end;
 
 procedure TestJsonReader.TestBookmark;
 const
-  JSON = '{ "x" : 1, "y" : 2 }';
+  JSON = '{"x":1,"y":2}';
 var
   Reader: IgoJsonReader;
   Bookmark: IgoBsonReaderBookmark;
@@ -841,20 +841,20 @@ procedure TestJsonReader.TestDateTime;
   end;
 
 begin
-  Test('{ $date : 0 }', 0);
-  Test('{ $date : -9223372036854775808 }', -9223372036854775808);
-  Test('{ $date : 9223372036854775807 }', 9223372036854775807);
-  Test('{ $date : { $numberLong : 0 } }', 0);
-  Test('{ $date : { $numberLong : -9223372036854775808 } }', -9223372036854775808);
-  Test('{ $date : { $numberLong : 9223372036854775807 } }', 9223372036854775807);
-  Test('{ $date : { $numberLong : "0" } }', 0);
-  Test('{ $date : { $numberLong : "-9223372036854775808" } }', -9223372036854775808);
-  Test('{ $date : { $numberLong : "9223372036854775807" } }', 9223372036854775807);
-  Test('{ $date : "1970-01-01T00:00:00Z" }', 0);
-  Test('{ $date : "0001-01-01T00:00:00Z" }', -62135596800000);
-  Test('{ $date : "1970-01-01T00:00:00.000Z" }', 0);
-  Test('{ $date : "0001-01-01T00:00:00.000Z" }', -62135596800000);
-  Test('{ $date : "9999-12-31T23:59:59.999Z" }', 253402300799999);
+  Test('{$date:0}', 0);
+  Test('{$date:-9223372036854775808}', -9223372036854775808);
+  Test('{$date:9223372036854775807}', 9223372036854775807);
+  Test('{$date:{$numberLong:0}}', 0);
+  Test('{$date:{$numberLong:-9223372036854775808}}', -9223372036854775808);
+  Test('{$date:{$numberLong:9223372036854775807}}', 9223372036854775807);
+  Test('{$date:{$numberLong:"0"}}', 0);
+  Test('{$date:{$numberLong:"-9223372036854775808"}}', -9223372036854775808);
+  Test('{$date:{$numberLong:"9223372036854775807"}}', 9223372036854775807);
+  Test('{$date:"1970-01-01T00:00:00Z"}', 0);
+  Test('{$date:"0001-01-01T00:00:00Z"}', -62135596800000);
+  Test('{$date:"1970-01-01T00:00:00.000Z"}', 0);
+  Test('{$date:"0001-01-01T00:00:00.000Z"}', -62135596800000);
+  Test('{$date:"9999-12-31T23:59:59.999Z"}', 253402300799999);
   Test('new Date(0)', 0);
   Test('new Date(9223372036854775807)', 9223372036854775807);
   Test('new Date(-9223372036854775808)', -9223372036854775808);
@@ -867,7 +867,7 @@ end;
 
 procedure TestJsonReader.TestDateTimeIso8601;
 const
-  JSON = '{ "$date" : "1970-01-01T00:00:00Z" }';
+  JSON = '{"$date":"1970-01-01T00:00:00Z"}';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -882,12 +882,12 @@ begin
   V := Reader.ReadValue;
 
   Settings := TgoJsonWriterSettings.Create(TgoJsonOutputMode.Strict);
-  Assert.AreEqual('{ "$date" : 0 }', V.ToJson(Settings));
+  Assert.AreEqual('0', V.ToJson(Settings)); // '{"$date":0}'
 end;
 
 procedure TestJsonReader.TestDateTimeStrict;
 const
-  JSON = '{ "$date" : 0 }';
+  JSON = '{"$date":0}';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -902,12 +902,12 @@ begin
   V := Reader.ReadValue;
 
   Settings := TgoJsonWriterSettings.Create(TgoJsonOutputMode.Strict);
-  Assert.AreEqual(JSON, V.ToJson(Settings));
+  Assert.AreEqual('0'{JSON}, V.ToJson(Settings));
 end;
 
 procedure TestJsonReader.TestDocumentEmpty;
 const
-  JSON = '{ }';
+  JSON = '{}';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -926,7 +926,7 @@ end;
 
 procedure TestJsonReader.TestDocumentNested;
 const
-  JSON = '{ "a" : { "x" : 1 }, "y" : 2 }';
+  JSON = '{"a":{"x":1},"y":2}';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -961,7 +961,7 @@ end;
 
 procedure TestJsonReader.TestDocumentOneElement;
 const
-  JSON = '{ "x" : 1 }';
+  JSON = '{"x":1}';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -986,7 +986,7 @@ end;
 
 procedure TestJsonReader.TestDocumentTwoElements;
 const
-  JSON = '{ "x" : 1, "y" : 2 }';
+  JSON = '{"x":1,"y":2}';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -1100,7 +1100,7 @@ end;
 
 procedure TestJsonReader.TestHexData;
 const
-  JSON = 'HexData(0, "123")';
+  JSON = 'HexData(0,"123")';
 var
   Reader: IgoJsonReader;
   Bytes: TBytes;
@@ -1117,7 +1117,7 @@ begin
 
   Reader := TgoJsonReader.Create(JSON);
   V := Reader.ReadValue;
-  Assert.AreEqual('new BinData(0, "ASM=")', V.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('new BinData(0,"ASM=")', V.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestJsonReader.TestInt32;
@@ -1174,12 +1174,12 @@ procedure TestJsonReader.TestInt64;
   end;
 
 begin
-  Test('{ $numberLong: 1 }', 1);
-  Test('{ $numberLong: -9223372036854775808 }', -9223372036854775808);
-  Test('{ $numberLong: 9223372036854775807 }', 9223372036854775807);
-  Test('{ $numberLong: "1" }', 1);
-  Test('{ $numberLong: "-9223372036854775808" }', -9223372036854775808);
-  Test('{ $numberLong: "9223372036854775807" }', 9223372036854775807);
+  Test('{$numberLong:1}', 1);
+  Test('{$numberLong:-9223372036854775808}', -9223372036854775808);
+  Test('{$numberLong:9223372036854775807}', 9223372036854775807);
+  Test('{$numberLong:"1"}', 1);
+  Test('{$numberLong:"-9223372036854775808"}', -9223372036854775808);
+  Test('{$numberLong:"9223372036854775807"}', 9223372036854775807);
   Test('NumberLong(1)', 1);
   Test('NumberLong(-9223372036854775808)', -9223372036854775808);
   Test('NumberLong(9223372036854775807)', 9223372036854775807);
@@ -1190,7 +1190,7 @@ end;
 
 procedure TestJsonReader.TestJavaScript;
 const
-  JSON = '{ "$code" : "function f() { return 1; }" }';
+  JSON = '{"$code":"function f() {return 1;}"}';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -1198,7 +1198,7 @@ begin
   Reader := TgoJsonReader.Create(JSON);
 
   Assert.AreEqual(Ord(TgoBsonType.JavaScript), Ord(Reader.ReadBsonType));
-  Assert.AreEqual('function f() { return 1; }', Reader.ReadJavaScript);
+  Assert.AreEqual('function f() {return 1;}', Reader.ReadJavaScript);
 
   Assert.AreEqual(Ord(TgoBsonReaderState.Initial), Ord(Reader.State));
 
@@ -1209,7 +1209,7 @@ end;
 
 procedure TestJsonReader.TestJavaScriptWithScope;
 const
-  JSON = '{ "$code" : "function f() { return n; }", "$scope" : { "n" : 1 } }';
+  JSON = '{"$code":"function f() {return n;}","$scope":{"n":1}}';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -1217,7 +1217,7 @@ begin
   Reader := TgoJsonReader.Create(JSON);
 
   Assert.AreEqual(Ord(TgoBsonType.JavaScriptWithScope), Ord(Reader.ReadBsonType));
-  Assert.AreEqual('function f() { return n; }', Reader.ReadJavaScriptWithScope);
+  Assert.AreEqual('function f() {return n;}', Reader.ReadJavaScriptWithScope);
 
   Reader.ReadStartDocument;
   Assert.AreEqual(Ord(TgoBsonType.Int32), Ord(Reader.ReadBsonType));
@@ -1237,7 +1237,7 @@ end;
 
 procedure TestJsonReader.TestMaxKey;
 const
-  TEST_CASES: array [0..2] of String = ('{ $maxKey : 1 }', '{ $maxkey : 1 }', 'MaxKey');
+  TEST_CASES: array [0..2] of String = ('{$maxKey:1}', '{$maxkey:1}', 'MaxKey');
 var
   Reader: IgoJsonReader;
   I: Integer;
@@ -1258,7 +1258,7 @@ end;
 
 procedure TestJsonReader.TestMinKey;
 const
-  TEST_CASES: array [0..2] of String = ('{ $minKey : 1 }', '{ $minkey : 1 }', 'MinKey');
+  TEST_CASES: array [0..2] of String = ('{$minKey:1}', '{$minkey:1 }', 'MinKey');
 var
   Reader: IgoJsonReader;
   I: Integer;
@@ -1279,7 +1279,7 @@ end;
 
 procedure TestJsonReader.TestNestedArray;
 const
-  JSON = '{ "a" : [1, 2] }';
+  JSON = '{"a":[1,2]}';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -1306,7 +1306,7 @@ end;
 
 procedure TestJsonReader.TestNestedDocument;
 const
-  JSON = '{ "a" : { "b" : 1, "c" : 2 } }';
+  JSON = '{"a":{"b":1,"c":2}}';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -1353,8 +1353,8 @@ end;
 procedure TestJsonReader.TestObjectId;
 const
   TEST_CASES: array [0..2] of String = (
-    '{ $oid : "0102030405060708090a0b0c" }',
-    '{ "$oid" : "0102030405060708090a0b0c" }',
+    '{$oid:"0102030405060708090a0b0c"}',
+    '{"$oid":"0102030405060708090a0b0c"}',
     'ObjectId("0102030405060708090a0b0c")');
 var
   Reader: IgoJsonReader;
@@ -1374,15 +1374,15 @@ begin
     V := Reader.ReadValue;
     Assert.AreEqual('ObjectId("0102030405060708090a0b0c")', V.ToJson(TgoJsonWriterSettings.Shell));
 
-    Assert.AreEqual('{ "$oid" : "0102030405060708090a0b0c" }', V.ToJson);
+    Assert.AreEqual('{"$oid":"0102030405060708090a0b0c" }', V.ToJson);
   end;
 end;
 
 procedure TestJsonReader.TestRegularExpressions;
 const
   TEST_CASES: array [0..3] of String = (
-    '{ $regex : "abc", $options : "i" }',
-    '{ $regex : "abc/", $options : "i" }',
+    '{$regex:"abc",$options:"i"}',
+    '{$regex:"abc/",$options:"i"}',
     '/abc/i',
     '/abc\//i');
 var
@@ -1428,7 +1428,7 @@ end;
 
 procedure TestJsonReader.TestRegularExpressionStrict;
 const
-  JSON = '{ "$regex" : "pattern", "$options" : "imxs" }';
+  JSON = '{"$regex":"pattern","$options":"imxs"}';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -1487,7 +1487,7 @@ end;
 
 procedure TestJsonReader.TestSymbol;
 const
-  JSON = '{ "$symbol" : "symbol" }';
+  JSON = '{"$symbol":"symbol"}';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -1518,9 +1518,9 @@ procedure TestJsonReader.TestTimestamp;
   end;
 
 begin
-  Test('{ $timestamp : { t : 1, i : 2 } }', $100000002);
-  Test('{ $timestamp : { t : -2147483648, i : -2147483648 } }', Int64($8000000080000000));
-  Test('{ $timestamp : { t : 2147483647, i : 2147483647 } }', $7fffffff7fffffff);
+  Test('{$timestamp:{t:1,i:2}}', $100000002);
+  Test('{$timestamp:{t:-2147483648,i:-2147483648}}', Int64($8000000080000000));
+  Test('{$timestamp:{t:2147483647,i:2147483647}}', $7fffffff7fffffff);
   Test('Timestamp(1, 2)', $100000002);
   Test('Timestamp(-2147483648, -2147483648)', Int64($8000000080000000));
   Test('Timestamp(2147483647, 2147483647)', $7fffffff7fffffff);
@@ -1528,7 +1528,7 @@ end;
 
 procedure TestJsonReader.TestTimestampConstructor;
 const
-  JSON = 'Timestamp(1, 2)';
+  JSON = 'Timestamp(1,2)';
 var
   Reader: IgoJsonReader;
   TS: TgoBsonTimestamp;
@@ -1548,7 +1548,7 @@ end;
 
 procedure TestJsonReader.TestTimestampExtendedJsonNew;
 const
-  JSON = '{ "$timestamp" : { "t" : 1, "i" : 2 } }';
+  JSON = '{"$timestamp":{"t":1,"i":2}}';
 var
   Reader: IgoJsonReader;
   TS: TgoBsonTimestamp;
@@ -1563,12 +1563,12 @@ begin
 
   Reader := TgoJsonReader.Create(JSON);
   V := Reader.ReadValue;
-  Assert.AreEqual('Timestamp(1, 2)', V.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('Timestamp(1,2)', V.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestJsonReader.TestTimestampExtendedJsonOld;
 const
-  JSON = '{ "$timestamp" : NumberLong(1234) }';
+  JSON = '{"$timestamp":NumberLong(1234)}';
 var
   Reader: IgoJsonReader;
   V: TgoBsonValue;
@@ -1581,12 +1581,12 @@ begin
 
   Reader := TgoJsonReader.Create(JSON);
   V := Reader.ReadValue;
-  Assert.AreEqual('Timestamp(0, 1234)', V.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('Timestamp(0,1234)', V.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestJsonReader.TestUndefined;
 const
-  TEST_CASES: array [0..1] of String = ('{ $undefined : true }', 'undefined');
+  TEST_CASES: array [0..1] of String = ('{$undefined:true}', 'undefined');
 var
   Reader: IgoJsonReader;
   I: Integer;
@@ -1649,7 +1649,7 @@ begin
   Doc := TgoBsonDocument.Create('array',
     TgoBsonArray.Create([1, 2, 3]));
 
-  Assert.AreEqual('{ "array" : [1, 2, 3] }', Doc.ToJson);
+  Assert.AreEqual('{"array":[1,2,3]}', Doc.ToJson);
 end;
 
 procedure TestJsonWriter.TestBinaryShell;
@@ -1670,10 +1670,10 @@ procedure TestJsonWriter.TestBinaryShell;
   end;
 
 begin
-  Test(TBytes.Create(), 'new BinData(0, "")');
-  Test(TBytes.Create(1), 'new BinData(0, "AQ==")');
-  Test(TBytes.Create(1, 2), 'new BinData(0, "AQI=")');
-  Test(TBytes.Create(1, 2, 3), 'new BinData(0, "AQID")');
+  Test(TBytes.Create(), 'new BinData(0,"")');
+  Test(TBytes.Create(1), 'new BinData(0,"AQ==")');
+  Test(TBytes.Create(1, 2), 'new BinData(0,"AQI=")');
+  Test(TBytes.Create(1, 2, 3), 'new BinData(0,"AQID")');
   Test(TGuid.Empty, 'UUID("00000000-0000-0000-0000-000000000000")');
 end;
 
@@ -1694,11 +1694,11 @@ procedure TestJsonWriter.TestBinaryStrict;
   end;
 
 begin
-  Test(TBytes.Create(), '{ "$binary" : "", "$type" : "00" }');
-  Test(TBytes.Create(1), '{ "$binary" : "AQ==", "$type" : "00" }');
-  Test(TBytes.Create(1, 2), '{ "$binary" : "AQI=", "$type" : "00" }');
-  Test(TBytes.Create(1, 2, 3), '{ "$binary" : "AQID", "$type" : "00" }');
-  Test(TGuid.Empty, '{ "$binary" : "AAAAAAAAAAAAAAAAAAAAAA==", "$type" : "04" }');
+  Test(TBytes.Create(), '{"$binary":"","$type":"00"}');
+  Test(TBytes.Create(1), '{"$binary":"AQ==","$type":"00"}');
+  Test(TBytes.Create(1, 2), '{"$binary":"AQI=","$type":"00"}');
+  Test(TBytes.Create(1, 2, 3), '{"$binary":"AQID","$type":"00"}');
+  Test(TGuid.Empty, '{"$binary":"AAAAAAAAAAAAAAAAAAAAAA==","$type":"04"}');
 end;
 
 procedure TestJsonWriter.TestDateTimeShell;
@@ -1750,13 +1750,13 @@ var
   end;
 
 begin
-  Test(TgoBsonDateTime.Create(Int64.MinValue), '{ "$date" : -9223372036854775808 }');
-  Test(TgoBsonDateTime.Create(0), '{ "$date" : 0 }');
-  Test(TgoBsonDateTime.Create(Int64.MaxValue), '{ "$date" : 9223372036854775807 }');
-  Test(TgoBsonDateTime.Create(UnixDateDelta, True), '{ "$date" : 0 }');
+  Test(TgoBsonDateTime.Create(Int64.MinValue), '-9223372036854775808'); // {"$date":-9223372036854775808}
+  Test(TgoBsonDateTime.Create(0), '{"$date":0}');
+  Test(TgoBsonDateTime.Create(Int64.MaxValue), '{"$date":9223372036854775807}');
+  Test(TgoBsonDateTime.Create(UnixDateDelta, True), '{"$date":0}');
 
   DT := EncodeDateTime(2014, 4, 22, 10, 7, 23, 123);
-  Test(TgoBsonDateTime.Create(DT, True), '{ "$date" : 1398161243123 }');
+  Test(TgoBsonDateTime.Create(DT, True), '{"$date":1398161243123}');
 end;
 
 procedure TestJsonWriter.TestDouble;
@@ -1815,7 +1815,7 @@ begin
   Doc := TgoBsonDocument.Create('doc',
     TgoBsonDocument.Create('a', 1).Add('b', 2));
 
-  Assert.AreEqual('{ "doc" : { "a" : 1, "b" : 2 } }', Doc.ToJson);
+  Assert.AreEqual('{"doc":{"a":1,"b":2}}', Doc.ToJson);
 end;
 
 procedure TestJsonWriter.TestEmptyDocument;
@@ -1823,7 +1823,7 @@ var
   Doc: TgoBsonDocument;
 begin
   Doc := TgoBsonDocument.Create;
-  Assert.AreEqual('{ }', Doc.ToJson);
+  Assert.AreEqual('{}', Doc.ToJson);
 end;
 
 procedure TestJsonWriter.TestGuid;
@@ -1832,7 +1832,7 @@ var
 begin
   Doc := TgoBsonDocument.Create('guid', TGuid.Create('{B5F21E0C-2A0D-42d6-AD03-D827008D8AB6}'));
 
-  Assert.AreEqual('{ "guid" : UUID("b5f21e0c-2a0d-42d6-ad03-d827008d8ab6") }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"guid":UUID("b5f21e0c-2a0d-42d6-ad03-d827008d8ab6")}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestJsonWriter.TestInt64Shell;
@@ -1897,7 +1897,7 @@ begin
   Doc := TgoBsonDocument.Create('f',
     TgoBsonJavaScript.Create('function f() { return 1; }'));
 
-  Assert.AreEqual('{ "f" : { "$code" : "function f() { return 1; }" } }', Doc.ToJson);
+  Assert.AreEqual('{"f":{"$code":"function f() { return 1; }"}}', Doc.ToJson);
 end;
 
 procedure TestJsonWriter.TestJavaScriptWithScope;
@@ -1909,7 +1909,7 @@ begin
       'function f() { return n; }',
       TgoBsonDocument.Create('n', 1)));
 
-  Assert.AreEqual('{ "f" : { "$code" : "function f() { return n; }", "$scope" : { "n" : 1 } } }', Doc.ToJson);
+  Assert.AreEqual('{"f":{"$code":"function f() { return n; }","$scope":{"n":1}}}', Doc.ToJson);
 end;
 
 procedure TestJsonWriter.TestMaxKey;
@@ -1917,7 +1917,7 @@ var
   Doc: TgoBsonDocument;
 begin
   Doc := TgoBsonDocument.Create('maxkey', TgoBsonMaxKey.Value);
-  Assert.AreEqual('{ "maxkey" : MaxKey }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"maxkey":MaxKey}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestJsonWriter.TestMinKey;
@@ -1925,7 +1925,7 @@ var
   Doc: TgoBsonDocument;
 begin
   Doc := TgoBsonDocument.Create('minkey', TgoBsonMinKey.Value);
-  Assert.AreEqual('{ "minkey" : MinKey }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"minkey":MinKey}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestJsonWriter.TestNull;
@@ -1933,7 +1933,7 @@ var
   Doc: TgoBsonDocument;
 begin
   Doc := TgoBsonDocument.Create('null', TgoBsonNull.Value);
-  Assert.AreEqual('{ "null" : null }', Doc.ToJson);
+  Assert.AreEqual('{"null":null}', Doc.ToJson);
 end;
 
 procedure TestJsonWriter.TestObjectIdShell;
@@ -1959,7 +1959,7 @@ var
 begin
   Value := TgoObjectId.Create('4d0ce088e447ad08b4721a37');
   Json := Value.ToJson;
-  Assert.AreEqual('{ "$oid" : "4d0ce088e447ad08b4721a37" }', Json);
+  Assert.AreEqual('{"$oid":"4d0ce088e447ad08b4721a37" }', Json);
 
   Reader := TgoJsonReader.Create(Json);
   Actual := Reader.ReadValue;
@@ -1975,7 +1975,7 @@ begin
     TgoBsonDocument.Create('a', 1).Add('b', 2));
 
   Settings := TgoJsonWriterSettings.Create(True);
-  Assert.AreEqual('{'#13#10'  "doc" : {'#13#10'    "a" : 1,'#13#10'    "b" : 2'#13#10'  }'#13#10'}', Doc.ToJson(Settings));
+  Assert.AreEqual('{'#13#10'  "doc":{'#13#10'    "a":1,'#13#10'    "b":2'#13#10'  }'#13#10'}', Doc.ToJson(Settings));
 end;
 
 procedure TestJsonWriter.TestPrettyPrintedEmptyDocument;
@@ -1985,7 +1985,7 @@ var
 begin
   Doc := TgoBsonDocument.Create;
   Settings := TgoJsonWriterSettings.Create(True);
-  Assert.AreEqual('{ }', Doc.ToJson(Settings));
+  Assert.AreEqual('{}', Doc.ToJson(Settings));
 end;
 
 procedure TestJsonWriter.TestPrettyPrintedOneElement;
@@ -1995,7 +1995,7 @@ var
 begin
   Doc := TgoBsonDocument.Create('name', 'value');
   Settings := TgoJsonWriterSettings.Create(True);
-  Assert.AreEqual('{'#13#10'  "name" : "value"'#13#10'}', Doc.ToJson(Settings));
+  Assert.AreEqual('{'#13#10'  "name":"value"'#13#10'}', Doc.ToJson(Settings));
 end;
 
 procedure TestJsonWriter.TestPrettyPrintedTwoElements;
@@ -2005,7 +2005,7 @@ var
 begin
   Doc := TgoBsonDocument.Create('a', 'x').Add('b', 'y');
   Settings := TgoJsonWriterSettings.Create(True);
-  Assert.AreEqual('{'#13#10'  "a" : "x",'#13#10'  "b" : "y"'#13#10'}', Doc.ToJson(Settings));
+  Assert.AreEqual('{'#13#10'  "a":"x",'#13#10'  "b":"y"'#13#10'}', Doc.ToJson(Settings));
 end;
 
 procedure TestJsonWriter.TestRegularExpressionShell;
@@ -2055,15 +2055,15 @@ procedure TestJsonWriter.TestRegularExpressionStrict;
   end;
 
 begin
-  Test(TgoBsonRegularExpression.Create(''), '{ "$regex" : "", "$options" : "" }');
-  Test(TgoBsonRegularExpression.Create('a'), '{ "$regex" : "a", "$options" : "" }');
-  Test(TgoBsonRegularExpression.Create('a/b'), '{ "$regex" : "a/b", "$options" : "" }');
-  Test(TgoBsonRegularExpression.Create('a\b'), '{ "$regex" : "a\\b", "$options" : "" }');
-  Test(TgoBsonRegularExpression.Create('a', 'i'), '{ "$regex" : "a", "$options" : "i" }');
-  Test(TgoBsonRegularExpression.Create('a', 'm'), '{ "$regex" : "a", "$options" : "m" }');
-  Test(TgoBsonRegularExpression.Create('a', 'x'), '{ "$regex" : "a", "$options" : "x" }');
-  Test(TgoBsonRegularExpression.Create('a', 's'), '{ "$regex" : "a", "$options" : "s" }');
-  Test(TgoBsonRegularExpression.Create('a', 'imxs'), '{ "$regex" : "a", "$options" : "imxs" }');
+  Test(TgoBsonRegularExpression.Create(''), '{"$regex":"","$options":""}');
+  Test(TgoBsonRegularExpression.Create('a'), '{"$regex":"a","$options":""}');
+  Test(TgoBsonRegularExpression.Create('a/b'), '{"$regex":"a\/b","$options":""}');
+  Test(TgoBsonRegularExpression.Create('a\b'), '{"$regex":"a\\b","$options":""}');
+  Test(TgoBsonRegularExpression.Create('a', 'i'), '{"$regex":"a","$options":"i"}');
+  Test(TgoBsonRegularExpression.Create('a', 'm'), '{"$regex":"a","$options":"m"}');
+  Test(TgoBsonRegularExpression.Create('a', 'x'), '{"$regex":"a","$options":"x"}');
+  Test(TgoBsonRegularExpression.Create('a', 's'), '{"$regex":"a","$options":"s"}');
+  Test(TgoBsonRegularExpression.Create('a', 'imxs'), '{"$regex":"a","$options":"imxs"}');
 end;
 
 procedure TestJsonWriter.TestSampleDocument;
@@ -2081,7 +2081,7 @@ begin
     Writer.WriteEndDocument;
   Writer.WriteEndDocument;
 
-  Assert.AreEqual('{ "tester" : { "email" : "tester@grijjy.com", "profile" : { "first_name" : "John", "last_name" : "Doe" } } }', Writer.ToJson);
+  Assert.AreEqual('{"tester":{"email":"tester@grijjy.com","profile":{"first_name":"John","last_name":"Doe"}}}', Writer.ToJson);
 
   Writer := TgoJsonWriter.Create;
   Writer.WriteStartDocument;
@@ -2096,7 +2096,7 @@ begin
     Writer.WriteEndDocument;
   Writer.WriteEndDocument;
 
-  Assert.AreEqual('{ "tester" : { "email" : "tester@grijjy.com", "profile" : { "first_name" : "John", "last_name" : "Doe" } } }', Writer.ToJson);
+  Assert.AreEqual('{"tester":{"email":"tester@grijjy.com","profile":{"first_name":"John","last_name":"Doe"}}}', Writer.ToJson);
 end;
 
 procedure TestJsonWriter.TestSingleString;
@@ -2104,7 +2104,7 @@ var
   Doc: TgoBsonDocument;
 begin
   Doc := TgoBsonDocument.Create('abc', 'xyz');
-  Assert.AreEqual('{ "abc" : "xyz" }', Doc.ToJson);
+  Assert.AreEqual('{"abc":"xyz"}', Doc.ToJson);
 end;
 
 procedure TestJsonWriter.TestString;
@@ -2151,7 +2151,7 @@ var
   Doc: TgoBsonDocument;
 begin
   Doc := TgoBsonDocument.Create('symbol', TgoBsonSymbolTable.Lookup('name'));
-  Assert.AreEqual('{ "symbol" : { "$symbol" : "name" } }', Doc.ToJson);
+  Assert.AreEqual('{"symbol":{"$symbol":"name"}}', Doc.ToJson);
 end;
 
 procedure TestJsonWriter.TestTimestamp;
@@ -2159,7 +2159,7 @@ var
   Doc: TgoBsonDocument;
 begin
   Doc := TgoBsonDocument.Create('timestamp', TgoBsonTimestamp.Create(1, 2));
-  Assert.AreEqual('{ "timestamp" : Timestamp(1, 2) }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"timestamp":Timestamp(1,2)}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestJsonWriter.TestUndefined;
@@ -2167,7 +2167,7 @@ var
   Doc: TgoBsonDocument;
 begin
   Doc := TgoBsonDocument.Create('undefined', TgoBsonUndefined.Value);
-  Assert.AreEqual('{ "undefined" : undefined }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"undefined":undefined}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 { TestBsonWriter }
@@ -2988,7 +2988,7 @@ begin
   Writer.WriteEndArray;
   Writer.WriteEndArray;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : [["a"]] }', Doc.ToJson);
+  Assert.AreEqual('{"a":[["a"]]}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestArrayWithNestedArrayWithTwoElements;
@@ -3006,7 +3006,7 @@ begin
   Writer.WriteEndArray;
   Writer.WriteEndArray;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : [["a", "b"]] }', Doc.ToJson);
+  Assert.AreEqual('{"a":[["a","b"]]}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestArrayWithNestedEmptyArray;
@@ -3022,7 +3022,7 @@ begin
   Writer.WriteEndArray;
   Writer.WriteEndArray;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : [[]] }', Doc.ToJson);
+  Assert.AreEqual('{"a":[[]]}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestArrayWithOneElement;
@@ -3037,7 +3037,7 @@ begin
   Writer.WriteInt32(1);
   Writer.WriteEndArray;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : [1] }', Doc.ToJson);
+  Assert.AreEqual('{"a":[1]}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestArrayWithTwoElements;
@@ -3053,7 +3053,7 @@ begin
   Writer.WriteInt32(2);
   Writer.WriteEndArray;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : [1, 2] }', Doc.ToJson);
+  Assert.AreEqual('{"a":[1,2]}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestArrayWithTwoNestedArrays;
@@ -3077,7 +3077,7 @@ begin
   Writer.WriteEndArray;
   Writer.WriteEndArray;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : [["a", "b"], ["c", { "d" : 9 }]] }', Doc.ToJson);
+  Assert.AreEqual('{"a":[["a","b"],["c",{"d":9}]]}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestEmptyDocument;
@@ -3089,7 +3089,7 @@ begin
   Writer := TgoBsonDocumentWriter.Create(Doc);
   Writer.WriteStartDocument;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ }', Doc.ToJson);
+  Assert.AreEqual('{}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestInt32;
@@ -3102,7 +3102,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteInt32('a', 1);
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : 1 }', Doc.ToJson);
+  Assert.AreEqual('{"a":1}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestInt64;
@@ -3115,7 +3115,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteInt64('a', 1);
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : NumberLong(1) }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"a":NumberLong(1)}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestBsonDocumentWriter.TestJavaScript;
@@ -3128,7 +3128,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteJavaScript('a', 'x');
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : { "$code" : "x" } }', Doc.ToJson);
+  Assert.AreEqual('{"a":{"$code":"x"}}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestJavaScriptWithScope;
@@ -3145,7 +3145,7 @@ begin
   Writer.WriteInt32('y', 2);
   Writer.WriteEndDocument;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : { "$code" : "x", "$scope" : { "x" : 1, "y" : 2 } } }', Doc.ToJson);
+  Assert.AreEqual('{"a":{"$code":"x","$scope":{"x":1,"y":2}}}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestMaxKey;
@@ -3158,7 +3158,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteMaxKey('a');
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : MaxKey }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"a":MaxKey}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestBsonDocumentWriter.TestMinKey;
@@ -3171,7 +3171,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteMinKey('a');
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : MinKey }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"a":MinKey}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestBsonDocumentWriter.TestNull;
@@ -3184,7 +3184,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteNull('a');
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : null }', Doc.ToJson);
+  Assert.AreEqual('{"a":null}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestObjectId;
@@ -3197,7 +3197,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteObjectId('a', TgoObjectId.Empty);
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : ObjectId("000000000000000000000000") }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"a":ObjectId("000000000000000000000000")}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestBsonDocumentWriter.TestOneBinary;
@@ -3210,7 +3210,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteBytes('a', TBytes.Create(1));
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : new BinData(0, "AQ==") }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"a":new BinData(0,"AQ==")}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestBsonDocumentWriter.TestBoolean;
@@ -3223,7 +3223,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteBoolean('a', True);
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : true }', Doc.ToJson);
+  Assert.AreEqual('{"a":true}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestDateTime;
@@ -3236,7 +3236,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteDateTime('a', 0);
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : ISODate("1970-01-01T00:00:00Z") }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"a":ISODate("1970-01-01T00:00:00Z")}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestBsonDocumentWriter.TestDouble;
@@ -3249,7 +3249,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteDouble('a', 1.5);
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : 1.5 }', Doc.ToJson);
+  Assert.AreEqual('{"a":1.5}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestOneEmptyArray;
@@ -3263,7 +3263,7 @@ begin
   Writer.WriteStartArray('a');
   Writer.WriteEndArray;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : [] }', Doc.ToJson);
+  Assert.AreEqual('{"a":[]}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestOneEmptyDocument;
@@ -3277,7 +3277,7 @@ begin
   Writer.WriteStartDocument('a');
   Writer.WriteEndDocument;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : { } }', Doc.ToJson);
+  Assert.AreEqual('{"a":{}}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestOneNestedBinary;
@@ -3292,7 +3292,7 @@ begin
   Writer.WriteBytes('a', TBytes.Create(1, 2));
   Writer.WriteEndDocument;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "nested" : { "a" : new BinData(0, "AQI=") } }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"nested":{"a":new BinData(0,"AQI=")}}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestBsonDocumentWriter.TestOneNestedEmptyArray;
@@ -3308,7 +3308,7 @@ begin
   Writer.WriteEndArray;
   Writer.WriteEndDocument;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "nested" : { "a" : [] } }', Doc.ToJson);
+  Assert.AreEqual('{"nested":{"a":[]}}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestOneNestedEmptyDocument;
@@ -3324,7 +3324,7 @@ begin
   Writer.WriteEndDocument;
   Writer.WriteEndDocument;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "nested" : { "a" : { } } }', Doc.ToJson);
+  Assert.AreEqual('{"nested":{"a":{}}}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestRegularExpression;
@@ -3337,7 +3337,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteRegularExpression('a', TgoBsonRegularExpression.Create('p', 'i'));
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : /p/i }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"a":/p/i}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestBsonDocumentWriter.TestString;
@@ -3350,7 +3350,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteString('a', 'x');
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : "x" }', Doc.ToJson);
+  Assert.AreEqual('{"a":"x"}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestSymbol;
@@ -3363,7 +3363,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteSymbol('a', 'x');
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : { "$symbol" : "x" } }', Doc.ToJson);
+  Assert.AreEqual('{"a":{"$symbol":"x"}}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestTimestamp;
@@ -3376,7 +3376,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteTimestamp('a', 1);
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : Timestamp(0, 1) }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"a":Timestamp(0,1)}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestBsonDocumentWriter.TestTwoBinaries;
@@ -3390,7 +3390,7 @@ begin
   Writer.WriteBytes('a', TBytes.Create(1));
   Writer.WriteBytes('b', TBytes.Create(2));
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : new BinData(0, "AQ=="), "b" : new BinData(0, "Ag==") }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"a":new BinData(0,"AQ=="),"b":new BinData(0,"Ag==")}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestBsonDocumentWriter.TestTwoEmptyArrays;
@@ -3406,7 +3406,7 @@ begin
   Writer.WriteStartArray('b');
   Writer.WriteEndArray;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : [], "b" : [] }', Doc.ToJson);
+  Assert.AreEqual('{"a":[],"b":[]}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestTwoEmptyDocuments;
@@ -3422,7 +3422,7 @@ begin
   Writer.WriteStartDocument('b');
   Writer.WriteEndDocument;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : { }, "b" : { } }', Doc.ToJson);
+  Assert.AreEqual('{"a":{},"b":{}}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestTwoNestedBinaries;
@@ -3438,7 +3438,7 @@ begin
   Writer.WriteBytes('b', TBytes.Create(2));
   Writer.WriteEndDocument;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "nested" : { "a" : new BinData(0, "AQ=="), "b" : new BinData(0, "Ag==") } }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"nested":{"a":new BinData(0,"AQ=="),"b":new BinData(0,"Ag==")}}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 procedure TestBsonDocumentWriter.TestTwoNestedEmptyArrays;
@@ -3456,7 +3456,7 @@ begin
   Writer.WriteEndArray;
   Writer.WriteEndDocument;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "nested" : { "a" : [], "b" : [] } }', Doc.ToJson);
+  Assert.AreEqual('{"nested":{"a":[],"b":[]}}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestTwoNestedEmptyDocuments;
@@ -3474,7 +3474,7 @@ begin
   Writer.WriteEndDocument;
   Writer.WriteEndDocument;
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "nested" : { "a" : { }, "b" : { } } }', Doc.ToJson);
+  Assert.AreEqual('{"nested":{"a":{},"b":{}}}', Doc.ToJson);
 end;
 
 procedure TestBsonDocumentWriter.TestUndefined;
@@ -3487,7 +3487,7 @@ begin
   Writer.WriteStartDocument;
   Writer.WriteUndefined('a');
   Writer.WriteEndDocument;
-  Assert.AreEqual('{ "a" : undefined }', Doc.ToJson(TgoJsonWriterSettings.Shell));
+  Assert.AreEqual('{"a":undefined}', Doc.ToJson(TgoJsonWriterSettings.Shell));
 end;
 
 { TestBsonDocumentReader }
@@ -3517,7 +3517,7 @@ end;
 
 procedure TestBsonDocumentReader.TestBookmark;
 const
-  JSON = '{ "x" : 1, "y" : 2 }';
+  JSON = '{"x":1,"y":2}';
 var
   Doc: TgoBsonDocument;
   Reader: IgoBsonDocumentReader;

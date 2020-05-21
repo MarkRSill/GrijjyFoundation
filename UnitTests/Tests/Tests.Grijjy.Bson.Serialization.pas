@@ -1319,7 +1319,7 @@ var
 begin
   R.Initialize;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : false, "B" : false, "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "false" }', Json);
+  Assert.AreEqual('{"N":false,"B":false,"D":0.0,"I":0,"L":NumberLong(0),"S":"false"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1336,7 +1336,7 @@ var
 begin
   FillChar(R, SizeOf(R), True);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : true, "B" : true, "D" : 1.0, "I" : 1, "L" : NumberLong(1), "S" : "true" }', Json);
+  Assert.AreEqual('{"N":true,"B":true,"D":1.0,"I":1,"L":NumberLong(1),"S":"true"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1362,7 +1362,7 @@ var
 begin
   R.Initialize(Int8.MaxValue);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 127, "D" : 127.0, "I" : 127, "L" : NumberLong(127), "S" : "127" }', Json);
+  Assert.AreEqual('{"N":127,"D":127.0,"I":127,"L":NumberLong(127),"S":"127"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1379,7 +1379,7 @@ var
 begin
   R.Initialize(Int8.MinValue);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : -128, "D" : -128.0, "I" : -128, "L" : NumberLong(-128), "S" : "-128" }', Json);
+  Assert.AreEqual('{"N":-128,"D":-128.0,"I":-128,"L":NumberLong(-128),"S":"-128"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1396,7 +1396,7 @@ var
 begin
   R.Initialize(-1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : -1, "D" : -1.0, "I" : -1, "L" : NumberLong(-1), "S" : "-1" }', Json);
+  Assert.AreEqual('{"N":-1,"D":-1.0,"I":-1,"L":NumberLong(-1),"S":"-1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1413,7 +1413,7 @@ var
 begin
   R.Initialize(1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 1, "D" : 1.0, "I" : 1, "L" : NumberLong(1), "S" : "1" }', Json);
+  Assert.AreEqual('{"N":1,"D":1.0,"I":1,"L":NumberLong(1),"S":"1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1430,7 +1430,7 @@ var
 begin
   R.Initialize(0);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 0, "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":0,"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1460,7 +1460,7 @@ var
 begin
   R.Initialize(Int16.MaxValue);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 32767, "D" : 32767.0, "I" : 32767, "L" : NumberLong(32767), "S" : "32767" }', Json);
+  Assert.AreEqual('{"N":32767,"D":32767.0,"I":32767,"L":NumberLong(32767),"S":"32767"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1477,7 +1477,7 @@ var
 begin
   R.Initialize(Int16.MinValue);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : -32768, "D" : -32768.0, "I" : -32768, "L" : NumberLong(-32768), "S" : "-32768" }', Json);
+  Assert.AreEqual('{"N":-32768,"D":-32768.0,"I":-32768,"L":NumberLong(-32768),"S":"-32768"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1494,7 +1494,7 @@ var
 begin
   R.Initialize(-1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : -1, "D" : -1.0, "I" : -1, "L" : NumberLong(-1), "S" : "-1" }', Json);
+  Assert.AreEqual('{"N":-1,"D":-1.0,"I":-1,"L":NumberLong(-1),"S":"-1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1511,7 +1511,7 @@ var
 begin
   R.Initialize(1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 1, "D" : 1.0, "I" : 1, "L" : NumberLong(1), "S" : "1" }', Json);
+  Assert.AreEqual('{"N":1,"D":1.0,"I":1,"L":NumberLong(1),"S":"1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1528,7 +1528,7 @@ var
 begin
   R.Initialize(0);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 0, "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":0,"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1559,7 +1559,7 @@ begin
   R := TTestClass.Create(Integer.MaxValue);
   Rehydrated := nil;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 2147483647, "D" : 2147483647.0, "I" : 2147483647, "L" : NumberLong(2147483647), "S" : "2147483647" }', Json);
+  Assert.AreEqual('{"N":2147483647,"D":2147483647.0,"I":2147483647,"L":NumberLong(2147483647),"S":"2147483647"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1580,7 +1580,7 @@ begin
   R := TTestClass.Create(Integer.MinValue);
   Rehydrated := nil;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : -2147483648, "D" : -2147483648.0, "I" : -2147483648, "L" : NumberLong(-2147483648), "S" : "-2147483648" }', Json);
+  Assert.AreEqual('{"N":-2147483648,"D":-2147483648.0,"I":-2147483648,"L":NumberLong(-2147483648),"S":"-2147483648"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1601,7 +1601,7 @@ begin
   R := TTestClass.Create(-1);
   Rehydrated := nil;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : -1, "D" : -1.0, "I" : -1, "L" : NumberLong(-1), "S" : "-1" }', Json);
+  Assert.AreEqual('{"N":-1,"D":-1.0,"I":-1,"L":NumberLong(-1),"S":"-1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1622,7 +1622,7 @@ begin
   R := TTestClass.Create(1);
   Rehydrated := nil;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 1, "D" : 1.0, "I" : 1, "L" : NumberLong(1), "S" : "1" }', Json);
+  Assert.AreEqual('{"N":1,"D":1.0,"I":1,"L":NumberLong(1),"S":"1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1643,7 +1643,7 @@ begin
   R := TTestClass.Create(0);
   Rehydrated := nil;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 0, "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":0,"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1697,7 +1697,7 @@ begin
   R.Initialize(Int64.MaxValue);
   R.D := 0;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : NumberLong("9223372036854775807"), "D" : 0.0, "I" : -1, "L" : NumberLong("9223372036854775807"), "S" : "9223372036854775807" }', Json);
+  Assert.AreEqual('{"N":NumberLong("9223372036854775807"),"D":0.0,"I":-1,"L":NumberLong("9223372036854775807"),"S":"9223372036854775807"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1715,7 +1715,7 @@ begin
   R.Initialize(Int64.MinValue);
   R.D := 0;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : NumberLong("-9223372036854775808"), "D" : 0.0, "I" : 0, "L" : NumberLong("-9223372036854775808"), "S" : "-9223372036854775808" }', Json);
+  Assert.AreEqual('{"N":NumberLong("-9223372036854775808"),"D":0.0,"I":0,"L":NumberLong("-9223372036854775808"),"S":"-9223372036854775808"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1732,7 +1732,7 @@ var
 begin
   R.Initialize(-1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : NumberLong(-1), "D" : -1.0, "I" : -1, "L" : NumberLong(-1), "S" : "-1" }', Json);
+  Assert.AreEqual('{"N":NumberLong(-1),"D":-1.0,"I":-1,"L":NumberLong(-1),"S":"-1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1749,7 +1749,7 @@ var
 begin
   R.Initialize(1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : NumberLong(1), "D" : 1.0, "I" : 1, "L" : NumberLong(1), "S" : "1" }', Json);
+  Assert.AreEqual('{"N":NumberLong(1),"D":1.0,"I":1,"L":NumberLong(1),"S":"1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1766,7 +1766,7 @@ var
 begin
   R.Initialize(0);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : NumberLong(0), "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":NumberLong(0),"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1796,7 +1796,7 @@ var
 begin
   R.Initialize(UInt8.MaxValue);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 255, "D" : 255.0, "I" : 255, "L" : NumberLong(255), "S" : "255" }', Json);
+  Assert.AreEqual('{"N":255,"D":255.0,"I":255,"L":NumberLong(255),"S":"255"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1813,7 +1813,7 @@ var
 begin
   R.Initialize(UInt8.MinValue);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 0, "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":0,"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1830,7 +1830,7 @@ var
 begin
   R.Initialize(1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 1, "D" : 1.0, "I" : 1, "L" : NumberLong(1), "S" : "1" }', Json);
+  Assert.AreEqual('{"N":1,"D":1.0,"I":1,"L":NumberLong(1),"S":"1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1847,7 +1847,7 @@ var
 begin
   R.Initialize(0);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 0, "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":0,"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1877,7 +1877,7 @@ var
 begin
   R.Initialize(UInt16.MaxValue);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 65535, "D" : 65535.0, "I" : 65535, "L" : NumberLong(65535), "S" : "65535" }', Json);
+  Assert.AreEqual('{"N":65535,"D":65535.0,"I":65535,"L":NumberLong(65535),"S":"65535"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1894,7 +1894,7 @@ var
 begin
   R.Initialize(UInt16.MinValue);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 0, "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":0,"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1911,7 +1911,7 @@ var
 begin
   R.Initialize(1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 1, "D" : 1.0, "I" : 1, "L" : NumberLong(1), "S" : "1" }', Json);
+  Assert.AreEqual('{"N":1,"D":1.0,"I":1,"L":NumberLong(1),"S":"1"}',Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1928,7 +1928,7 @@ var
 begin
   R.Initialize(0);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 0, "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":0,"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1958,7 +1958,7 @@ var
 begin
   R.Initialize(UInt32.MaxValue);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : -1, "D" : 4294967295.0, "I" : -1, "L" : NumberLong("4294967295"), "S" : "4294967295" }', Json);
+  Assert.AreEqual('{"N":-1,"D":4294967295.0,"I":-1,"L":NumberLong("4294967295"),"S":"4294967295"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1975,7 +1975,7 @@ var
 begin
   R.Initialize(UInt32.MinValue);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 0, "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":0,"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -1992,7 +1992,7 @@ var
 begin
   R.Initialize(1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 1, "D" : 1.0, "I" : 1, "L" : NumberLong(1), "S" : "1" }', Json);
+  Assert.AreEqual('{"N":1,"D":1.0,"I":1,"L":NumberLong(1),"S":"1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2009,7 +2009,7 @@ var
 begin
   R.Initialize(0);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 0, "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":0,"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2040,7 +2040,7 @@ begin
   R.Initialize(UInt64.MaxValue);
   R.D := 0;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : NumberLong(-1), "D" : 0.0, "I" : -1, "L" : NumberLong(-1), "S" : "18446744073709551615" }', Json);
+  Assert.AreEqual('{"N":NumberLong(-1),"D":0.0,"I":-1,"L":NumberLong(-1),"S":"18446744073709551615"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2057,7 +2057,7 @@ var
 begin
   R.Initialize(UInt64.MinValue);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : NumberLong(0), "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":NumberLong(0),"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2074,7 +2074,7 @@ var
 begin
   R.Initialize(1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : NumberLong(1), "D" : 1.0, "I" : 1, "L" : NumberLong(1), "S" : "1" }', Json);
+  Assert.AreEqual('{"N":NumberLong(1),"D":1.0,"I":1,"L":NumberLong(1),"S":"1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2091,7 +2091,7 @@ var
 begin
   R.Initialize(0);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : NumberLong(0), "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":NumberLong(0),"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2123,7 +2123,7 @@ begin
   R.I := 0;
   R.L := 0;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 3.40282346638529E38, "D" : 3.40282346638529E38, "I" : 0, "L" : NumberLong(0), "S" : "3.40282346638529E38" }', Json);
+  Assert.AreEqual('{"N":3.40282346638529E38,"D":3.40282346638529E38,"I":0,"L":NumberLong(0),"S":"3.40282346638529E38"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2142,7 +2142,7 @@ begin
   R.I := 0;
   R.L := 0;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : -3.40282346638529E38, "D" : -3.40282346638529E38, "I" : 0, "L" : NumberLong(0), "S" : "-3.40282346638529E38" }', Json);
+  Assert.AreEqual('{"N":-3.40282346638529E38,"D":-3.40282346638529E38,"I":0,"L":NumberLong(0),"S":"-3.40282346638529E38"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2159,7 +2159,7 @@ var
 begin
   R.Initialize(-1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : -1.0, "D" : -1.0, "I" : -1, "L" : NumberLong(-1), "S" : "-1" }', Json);
+  Assert.AreEqual('{"N":-1.0,"D":-1.0,"I":-1,"L":NumberLong(-1),"S":"-1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2178,7 +2178,7 @@ begin
   R.I := 0;
   R.L := 0;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : NaN, "D" : NaN, "I" : 0, "L" : NumberLong(0), "S" : "NaN" }', Json);
+  Assert.AreEqual('{"N":NaN,"D":NaN,"I":0,"L":NumberLong(0),"S":"NaN"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2197,7 +2197,7 @@ begin
   R.I := 0;
   R.L := 0;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : -Infinity, "D" : -Infinity, "I" : 0, "L" : NumberLong(0), "S" : "-Infinity" }', Json);
+  Assert.AreEqual('{"N":-Infinity,"D":-Infinity,"I":0,"L":NumberLong(0),"S":"-Infinity"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2214,7 +2214,7 @@ var
 begin
   R.Initialize(1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 1.0, "D" : 1.0, "I" : 1, "L" : NumberLong(1), "S" : "1" }', Json);
+  Assert.AreEqual('{"N":1.0,"D":1.0,"I":1,"L":NumberLong(1),"S":"1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2231,7 +2231,7 @@ var
 begin
   R.Initialize(1.5);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 1.5, "D" : 1.5, "I" : 1, "L" : NumberLong(1), "S" : "1.5" }', Json);
+  Assert.AreEqual('{"N":1.5,"D":1.5,"I":1,"L":NumberLong(1),"S":"1.5"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2250,7 +2250,7 @@ begin
   R.I := 0;
   R.L := 0;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : Infinity, "D" : Infinity, "I" : 0, "L" : NumberLong(0), "S" : "Infinity" }', Json);
+  Assert.AreEqual('{"N":Infinity,"D":Infinity,"I":0,"L":NumberLong(0),"S":"Infinity"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2267,7 +2267,7 @@ var
 begin
   R.Initialize(0);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 0.0, "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":0.0,"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2299,7 +2299,7 @@ begin
   R.I := 0;
   R.L := 0;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 1.77971620351369E308, "D" : 1.77971620351369E308, "I" : 0, "L" : NumberLong(0), "S" : "1.77971620351369E308" }', Json);
+  Assert.AreEqual('{"N":1.77971620351369E308,"D":1.77971620351369E308,"I":0,"L":NumberLong(0),"S":"1.77971620351369E308"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2318,7 +2318,7 @@ begin
   R.I := 0;
   R.L := 0;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : -1.77971620351369E308, "D" : -1.77971620351369E308, "I" : 0, "L" : NumberLong(0), "S" : "-1.77971620351369E308" }', Json);
+  Assert.AreEqual('{"N":-1.77971620351369E308,"D":-1.77971620351369E308,"I":0,"L":NumberLong(0),"S":"-1.77971620351369E308"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2335,7 +2335,7 @@ var
 begin
   R.Initialize(-1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : -1.0, "D" : -1.0, "I" : -1, "L" : NumberLong(-1), "S" : "-1" }', Json);
+  Assert.AreEqual('{"N":-1.0,"D":-1.0,"I":-1,"L":NumberLong(-1),"S":"-1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2354,7 +2354,7 @@ begin
   R.I := 0;
   R.L := 0;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : NaN, "D" : NaN, "I" : 0, "L" : NumberLong(0), "S" : "NaN" }', Json);
+  Assert.AreEqual('{"N":NaN,"D":NaN,"I":0,"L":NumberLong(0),"S":"NaN"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2373,7 +2373,7 @@ begin
   R.I := 0;
   R.L := 0;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : -Infinity, "D" : -Infinity, "I" : 0, "L" : NumberLong(0), "S" : "-Infinity" }', Json);
+  Assert.AreEqual('{"N":-Infinity,"D":-Infinity,"I":0,"L":NumberLong(0),"S":"-Infinity"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2390,7 +2390,7 @@ var
 begin
   R.Initialize(1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 1.0, "D" : 1.0, "I" : 1, "L" : NumberLong(1), "S" : "1" }', Json);
+  Assert.AreEqual('{"N":1.0,"D":1.0,"I":1,"L":NumberLong(1),"S":"1"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2407,7 +2407,7 @@ var
 begin
   R.Initialize(1.5);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 1.5, "D" : 1.5, "I" : 1, "L" : NumberLong(1), "S" : "1.5" }', Json);
+  Assert.AreEqual('{"N":1.5,"D":1.5,"I":1,"L":NumberLong(1),"S":"1.5"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2426,7 +2426,7 @@ begin
   R.I := 0;
   R.L := 0;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : Infinity, "D" : Infinity, "I" : 0, "L" : NumberLong(0), "S" : "Infinity" }', Json);
+  Assert.AreEqual('{"N":Infinity,"D":Infinity,"I":0,"L":NumberLong(0),"S":"Infinity"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2443,7 +2443,7 @@ var
 begin
   R.Initialize(0);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 0.0, "D" : 0.0, "I" : 0, "L" : NumberLong(0), "S" : "0" }', Json);
+  Assert.AreEqual('{"N":0.0,"D":0.0,"I":0,"L":NumberLong(0),"S":"0"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2473,7 +2473,7 @@ var
 begin
   R.Initialize('A');
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : "A", "S" : "A", "I" : 65, "L" : NumberLong(65) }', Json);
+  Assert.AreEqual('{"N":"A","S":"A","I":65,"L":NumberLong(65)}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2490,7 +2490,7 @@ var
 begin
   R.Initialize(#$FFFF);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : "\uffff", "S" : "\uffff", "I" : 65535, "L" : NumberLong(65535) }', Json);
+  Assert.AreEqual('{"N":"\uffff","S":"\uffff","I":65535,"L":NumberLong(65535)}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2507,7 +2507,7 @@ var
 begin
   R.Initialize(#1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : "\u0001", "S" : "\u0001", "I" : 1, "L" : NumberLong(1) }', Json);
+  Assert.AreEqual('{"N":"\u0001","S":"\u0001","I":1,"L":NumberLong(1)}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2524,7 +2524,7 @@ var
 begin
   R.Initialize(#0);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : "\u0000", "S" : "\u0000", "I" : 0, "L" : NumberLong(0) }', Json);
+  Assert.AreEqual('{"N":"\u0000","S":"\u0000","I":0,"L":NumberLong(0)}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2553,7 +2553,7 @@ var
 begin
   R.Initialize('');
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : "", "S" : "", "O" : ObjectId("000000000000000000000000"), "Y" : { "$symbol" : "" } }', Json);
+  Assert.AreEqual('{"N":"","S":"","O":ObjectId("000000000000000000000000"),"Y":{"$symbol":""}}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2570,7 +2570,7 @@ var
 begin
   R.Initialize('Hello World');
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : "Hello World", "S" : "Hello World", "O" : ObjectId("000000000000000000000000"), "Y" : { "$symbol" : "Hello World" } }', Json);
+  Assert.AreEqual('{"N":"Hello World","S":"Hello World","O":ObjectId("000000000000000000000000"),"Y":{"$symbol":"Hello World"}}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2588,7 +2588,7 @@ begin
   R.Initialize('123456789012345678901234');
   R.O := '123456789012345678901234';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : "123456789012345678901234", "S" : "123456789012345678901234", "O" : ObjectId("123456789012345678901234"), "Y" : { "$symbol" : "123456789012345678901234" } }', Json);
+  Assert.AreEqual('{"N":"123456789012345678901234","S":"123456789012345678901234","O":ObjectId("123456789012345678901234"),"Y":{"$symbol":"123456789012345678901234"}}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2617,9 +2617,9 @@ var
 begin
   R.Initialize(EncodeDateTime(9999, 12, 31, 23, 59, 59, 999));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : ISODate("9999-12-31T23:59:59.999Z"), "D" : ISODate("9999-12-31T23:59:59.999Z"), ' +
-    '"S" : "9999-12-31T23:59:59.9990000", "L" : NumberLong("3155378975999990000"), ' +
-    '"O" : { "DateTime" : ISODate("9999-12-31T23:59:59.999Z"), "Ticks" : NumberLong("3155378975999990000") } }', Json);
+  Assert.AreEqual('{"N":ISODate("9999-12-31T23:59:59.999Z"),"D":ISODate("9999-12-31T23:59:59.999Z"),' +
+    '"S":"9999-12-31T23:59:59.9990000","L":NumberLong("3155378975999990000"),' +
+    '"O":{"DateTime":ISODate("9999-12-31T23:59:59.999Z"),"Ticks":NumberLong("3155378975999990000")}}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2636,9 +2636,9 @@ var
 begin
   R.Initialize(EncodeDateTime(1, 1, 1, 0, 0, 0, 0));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : ISODate("0001-01-01T00:00:00Z"), "D" : ISODate("0001-01-01T00:00:00Z"), ' +
-    '"S" : "0001-01-01T00:00:00", "L" : NumberLong(0), ' +
-    '"O" : { "DateTime" : ISODate("0001-01-01T00:00:00Z"), "Ticks" : NumberLong(0) } }', Json);
+  Assert.AreEqual('{"N":ISODate("0001-01-01T00:00:00Z"),"D":ISODate("0001-01-01T00:00:00Z"),' +
+    '"S":"0001-01-01T00:00:00","L":NumberLong(0),' +
+    '"O":{"DateTime":ISODate("0001-01-01T00:00:00Z"),"Ticks":NumberLong(0)}}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2655,9 +2655,9 @@ var
 begin
   R.Initialize(EncodeDateTime(2016, 5, 1, 15, 28, 57, 784));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : ISODate("2016-05-01T15:28:57.784Z"), "D" : ISODate("2016-05-01T15:28:57.784Z"), ' +
-    '"S" : "2016-05-01T15:28:57.7840000", "L" : NumberLong("635977133377840000"), ' +
-    '"O" : { "DateTime" : ISODate("2016-05-01T15:28:57.784Z"), "Ticks" : NumberLong("635977133377840000") } }', Json);
+  Assert.AreEqual('{"N":ISODate("2016-05-01T15:28:57.784Z"),"D":ISODate("2016-05-01T15:28:57.784Z"),' +
+    '"S":"2016-05-01T15:28:57.7840000","L":NumberLong("635977133377840000"),' +
+    '"O":{"DateTime":ISODate("2016-05-01T15:28:57.784Z"),"Ticks":NumberLong("635977133377840000")}}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2688,9 +2688,9 @@ var
 begin
   R.Initialize(TGUID.Empty);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : UUID("00000000-0000-0000-0000-000000000000"), ' +
-                '"B" : UUID("00000000-0000-0000-0000-000000000000"), ' +
-                '"S" : "00000000-0000-0000-0000-000000000000" }', Json);
+  Assert.AreEqual('{"N":UUID("00000000-0000-0000-0000-000000000000"),' +
+                '"B":UUID("00000000-0000-0000-0000-000000000000"),' +
+                '"S":"00000000-0000-0000-0000-000000000000"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2707,9 +2707,9 @@ var
 begin
   R.Initialize(TGUID.Create('{01020304-0506-0708-090A-0B0C0D0E0F10}'));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : UUID("01020304-0506-0708-090a-0b0c0d0e0f10"), ' +
-                '"B" : UUID("01020304-0506-0708-090a-0b0c0d0e0f10"), ' +
-                '"S" : "01020304-0506-0708-090a-0b0c0d0e0f10" }', Json);
+  Assert.AreEqual('{"N":UUID("01020304-0506-0708-090a-0b0c0d0e0f10"),' +
+                '"B":UUID("01020304-0506-0708-090a-0b0c0d0e0f10"),' +
+                '"S":"01020304-0506-0708-090a-0b0c0d0e0f10"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2737,9 +2737,9 @@ var
 begin
   R.Initialize(TgoObjectId.Empty);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : ObjectId("000000000000000000000000"), ' +
-                '"O" : ObjectId("000000000000000000000000"), ' +
-                '"S" : "000000000000000000000000" }', Json);
+  Assert.AreEqual('{"N":ObjectId("000000000000000000000000"),' +
+                '"O":ObjectId("000000000000000000000000"),' +
+                '"S":"000000000000000000000000"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2756,9 +2756,9 @@ var
 begin
   R.Initialize(TgoObjectId.Create('0102030405060708090A0B0C'));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : ObjectId("0102030405060708090a0b0c"), ' +
-                '"O" : ObjectId("0102030405060708090a0b0c"), ' +
-                '"S" : "0102030405060708090a0b0c" }', Json);
+  Assert.AreEqual('{"N":ObjectId("0102030405060708090a0b0c"),' +
+                '"O":ObjectId("0102030405060708090a0b0c"),' +
+                '"S":"0102030405060708090a0b0c"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2787,7 +2787,7 @@ var
 begin
   R.Initialize(nil);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : new BinData(0, ""), "B" : new BinData(0, ""), "S" : "" }', Json);
+  Assert.AreEqual('{"N":new BinData(0,""),"B":new BinData(0,""),"S":""}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2804,7 +2804,7 @@ var
 begin
   R.Initialize(TBytes.Create(1, 2, 3, 4, 5, 6, 7, 8, 9));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : new BinData(0, "AQIDBAUGBwgJ"), "B" : new BinData(0, "AQIDBAUGBwgJ"), "S" : "010203040506070809" }', Json);
+  Assert.AreEqual('{"N":new BinData(0,"AQIDBAUGBwgJ"),"B":new BinData(0,"AQIDBAUGBwgJ"),"S":"010203040506070809"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2821,7 +2821,7 @@ var
 begin
   R.Initialize(TBytes.Create(1));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : new BinData(0, "AQ=="), "B" : new BinData(0, "AQ=="), "S" : "01" }', Json);
+  Assert.AreEqual('{"N":new BinData(0,"AQ=="),"B":new BinData(0,"AQ=="),"S":"01"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2838,7 +2838,7 @@ var
 begin
   R.Initialize(TBytes.Create(1, 2));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : new BinData(0, "AQI="), "B" : new BinData(0, "AQI="), "S" : "0102" }', Json);
+  Assert.AreEqual('{"N":new BinData(0,"AQI="),"B":new BinData(0,"AQI="),"S":"0102"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2866,7 +2866,7 @@ var
 begin
   R.Initialize(TEnum.A);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 0, "I" : 0, "L" : NumberLong(0), "S" : "A" }', Json);
+  Assert.AreEqual('{"N":0,"I":0,"L":NumberLong(0),"S":"A"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2883,7 +2883,7 @@ var
 begin
   R.Initialize(TEnum.B);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 1, "I" : 1, "L" : NumberLong(1), "S" : "B" }', Json);
+  Assert.AreEqual('{"N":1,"I":1,"L":NumberLong(1),"S":"B"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2900,7 +2900,7 @@ var
 begin
   R.Initialize(TEnum(2));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 2, "I" : 2, "L" : NumberLong(2), "S" : "2" }', Json);
+  Assert.AreEqual('{"N":2,"I":2,"L":NumberLong(2),"S":"2"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2929,7 +2929,7 @@ var
 begin
   R.Initialize([TEnum.A]);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 1, "I" : 1, "L" : NumberLong(1), "S" : "A" }', Json);
+  Assert.AreEqual('{"N":1,"I":1,"L":NumberLong(1),"S":"A"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2946,7 +2946,7 @@ var
 begin
   R.Initialize([TEnum.A, TEnum.B]);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 3, "I" : 3, "L" : NumberLong(3), "S" : "A, B" }', Json);
+  Assert.AreEqual('{"N":3,"I":3,"L":NumberLong(3),"S":"A, B"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2963,7 +2963,7 @@ var
 begin
   R.Initialize([TEnum.B]);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 2, "I" : 2, "L" : NumberLong(2), "S" : "B" }', Json);
+  Assert.AreEqual('{"N":2,"I":2,"L":NumberLong(2),"S":"B"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -2980,7 +2980,7 @@ var
 begin
   R.Initialize([]);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : 0, "I" : 0, "L" : NumberLong(0), "S" : "" }', Json);
+  Assert.AreEqual('{"N":0,"I":0,"L":NumberLong(0),"S":""}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3010,7 +3010,7 @@ begin
   R.A.X := 42;
   R.A.S := 'Foo';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : { "X" : 42, "S" : "Foo" } }', Json);
+  Assert.AreEqual('{"A":{"X":42,"S":"Foo"}}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3029,7 +3029,7 @@ var
 begin
   R.A := nil;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : null }', Json);
+  Assert.AreEqual('{"A":null}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Rehydrated.A := nil;
@@ -3047,7 +3047,7 @@ var
 begin
   R.A := nil;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : null }', Json);
+  Assert.AreEqual('{"A":null}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
 
@@ -3072,7 +3072,7 @@ var
 begin
   R.A := TObj.Create(42, 'Foo');
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : { "X" : 42, "S" : "Foo" } }', Json);
+  Assert.AreEqual('{"A":{"X":42,"S":"Foo"}}', Json);
 
   Rehydrated.A := nil;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
@@ -3093,7 +3093,7 @@ var
 begin
   R.A := TObj.Create(42, 'Foo');
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : { "X" : 42, "S" : "Foo" } }', Json);
+  Assert.AreEqual('{"A":{"X":42,"S":"Foo"}}', Json);
 
   Rehydrated.A := TObj.Create(1, 'Bar');
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
@@ -3135,7 +3135,7 @@ var
 begin
   R.A := nil;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : [] }', Json);
+  Assert.AreEqual('{"A":[]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3152,7 +3152,7 @@ var
 begin
   R.A := TArray<Integer>.Create(1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : [1] }', Json);
+  Assert.AreEqual('{"A":[1]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3169,7 +3169,7 @@ var
 begin
   R.A := TArray<Integer>.Create(1, 2, 3, 4, 5, 6, 7, 8, 9);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : [1, 2, 3, 4, 5, 6, 7, 8, 9] }', Json);
+  Assert.AreEqual('{"A":[1,2,3,4,5,6,7,8,9]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3188,7 +3188,7 @@ var
 begin
   R.A := nil;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : [] }', Json);
+  Assert.AreEqual('{"A":[]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3205,7 +3205,7 @@ var
 begin
   R.A := TArray<String>.Create('Foo');
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : ["Foo"] }', Json);
+  Assert.AreEqual('{"A":["Foo"]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3222,7 +3222,7 @@ var
 begin
   R.A := TArray<String>.Create('Foo', 'Bar');
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : ["Foo", "Bar"] }', Json);
+  Assert.AreEqual('{"A":["Foo","Bar"]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3241,7 +3241,7 @@ var
 begin
   R.Initialize(nil);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : [], "I" : [], "L" : [], "S" : [] }', Json);
+  Assert.AreEqual('{"N":[],"I":[],"L":[],"S":[]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3258,7 +3258,7 @@ var
 begin
   R.Initialize(TArray<TEnum>.Create(TEnum.A));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : [0], "I" : [0], "L" : [NumberLong(0)], "S" : ["A"] }', Json);
+  Assert.AreEqual('{"N":[0],"I":[0],"L":[NumberLong(0)],"S":["A"]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3275,7 +3275,7 @@ var
 begin
   R.Initialize(TArray<TEnum>.Create(TEnum.B, TEnum.A));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "N" : [1, 0], "I" : [1, 0], "L" : [NumberLong(1), NumberLong(0)], "S" : ["B", "A"] }', Json);
+  Assert.AreEqual('{"N":[1,0],"I":[1,0],"L":[NumberLong(1),NumberLong(0)],"S":["B","A"]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3309,7 +3309,7 @@ begin
   R.FValues.Add(TRec.Create(2, 'Bar'));
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : [{ "X" : 1, "S" : "Foo" }, { "X" : 2, "S" : "Bar" }] }', Json);
+  Assert.AreEqual('{"A":[{"X":1,"S":"Foo"},{"X":2,"S":"Bar"}]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3329,7 +3329,7 @@ var
 begin
   R.A := nil;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : [] }', Json);
+  Assert.AreEqual('{"A":[]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3346,7 +3346,7 @@ var
 begin
   R.A := TArray<TRec>.Create(TRec.Create(1, 'Foo'));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : [{ "X" : 1, "S" : "Foo" }] }', Json);
+  Assert.AreEqual('{"A":[{"X":1,"S":"Foo"}]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3363,7 +3363,7 @@ var
 begin
   R.A := TArray<TRec>.Create(TRec.Create(1, 'Foo'), TRec.Create(2, 'Bar'));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : [{ "X" : 1, "S" : "Foo" }, { "X" : 2, "S" : "Bar" }] }', Json);
+  Assert.AreEqual('{"A":[{"X":1,"S":"Foo"},{"X":2,"S":"Bar"}]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3419,7 +3419,7 @@ var
 begin
   R.A := nil;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : [] }', Json);
+  Assert.AreEqual('{"A":[]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3436,7 +3436,7 @@ var
 begin
   R.A := TArray<TObj>.Create(TObj.Create(1, 'Foo'));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : [{ "X" : 1, "S" : "Foo" }] }', Json);
+  Assert.AreEqual('{"A":[{"X":1,"S":"Foo"}]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3456,7 +3456,7 @@ var
 begin
   R.A := TArray<TObj>.Create(TObj.Create(1, 'Foo'), TObj.Create(2, 'Bar'));
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "A" : [{ "X" : 1, "S" : "Foo" }, { "X" : 2, "S" : "Bar" }] }', Json);
+  Assert.AreEqual('{"A":[{"X":1,"S":"Foo"},{"X":2,"S":"Bar"}]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3494,7 +3494,7 @@ begin
   A[1].S := 'Bar';
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(A, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('[{ "X" : 1, "S" : "Foo" }, { "X" : 2, "S" : "Bar" }]', Json);
+  Assert.AreEqual('[{"X":1,"S":"Foo"},{"X":2,"S":"Bar"}]', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Json, Rehydrated));
 
@@ -3505,7 +3505,7 @@ begin
   Assert.AreEqual('Bar', Rehydrated[1].S);
 end;
 
-{ TestBsonSerializePrimitiveTypesInRecord }
+{TestBsonSerializePrimitiveTypesInRecord }
 
 procedure TestBsonSerializePrimitiveTypesInRecord.TestAllTypes;
 var
@@ -3540,15 +3540,15 @@ begin
   R.AoS := TArray<String>.Create('Foo', 'Bar');
   R.AoI := TArray<Integer>.Create(42, 1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "B" : true, "I8" : -128, "I16" : -32768, "I32" : -2147483648, ' +
-    '"I64" : NumberLong("-9223372036854775808"), "U8" : 255, "U16" : 65535, ' +
-    '"U32" : -1, "U64" : NumberLong(-1), "F32" : 1.49999994701334E30, ' +
-    '"F64" : -1.5E300, "C" : "\r", "S" : "Foo", "DT" : ISODate("2016-05-01T15:28:57.784Z"), ' +
-    '"G" : UUID("01020304-0506-0708-090a-0b0c0d0e0f10"), ' +
-    '"Oid" : ObjectId("0102030405060708090a0b0c"), ' +
-    '"BA" : new BinData(0, "AQIDBAUGBwgJ"), "E" : 1, "St" : 3, ' +
-    '"R" : { "X" : 42, "S" : "Foo" }, "O1" : null, "O2" : { "X" : 43, "S" : "Bar" }, ' +
-    '"O3" : { "X" : 44, "S" : "Baz" }, "AoS" : ["Foo", "Bar"], "AoI" : [42, 1] }', Json);
+  Assert.AreEqual('{"B":true,"I8":-128,"I16":-32768,"I32":-2147483648,' +
+    '"I64":NumberLong("-9223372036854775808"),"U8":255,"U16":65535,' +
+    '"U32":-1,"U64":NumberLong(-1),"F32":1.49999994701334E30,' +
+    '"F64":-1.5E300,"C":"\r","S":"Foo","DT":ISODate("2016-05-01T15:28:57.784Z"),' +
+    '"G":UUID("01020304-0506-0708-090a-0b0c0d0e0f10"),' +
+    '"Oid":ObjectId("0102030405060708090a0b0c"),' +
+    '"BA":new BinData(0,"AQIDBAUGBwgJ"),"E":1,"St":3,' +
+    '"R":{"X":42,"S":"Foo"},"O1":null,"O2":{"X":43,"S":"Bar"},' +
+    '"O3":{"X":44,"S":"Baz"},"AoS":["Foo","Bar"],"AoI":[42,1]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3612,15 +3612,15 @@ begin
   R.AoS := TArray<String>.Create('Foo', 'Bar');
   R.AoI := TArray<Integer>.Create(42, 1);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "B" : true, "I8" : -128, "I16" : -32768, "I32" : -2147483648, ' +
-    '"I64" : NumberLong("-9223372036854775808"), "U8" : 255, "U16" : 65535, ' +
-    '"U32" : -1, "U64" : NumberLong(-1), "F32" : 1.49999994701334E30, ' +
-    '"F64" : -1.5E300, "C" : "\r", "S" : "Foo", "DT" : ISODate("2016-05-01T15:28:57.784Z"), ' +
-    '"G" : UUID("01020304-0506-0708-090a-0b0c0d0e0f10"), ' +
-    '"Oid" : ObjectId("0102030405060708090a0b0c"), ' +
-    '"BA" : new BinData(0, "AQIDBAUGBwgJ"), "E" : 1, "St" : 3, ' +
-    '"R" : { "X" : 42, "S" : "Foo" }, "O1" : null, "O2" : { "X" : 43, "S" : "Bar" }, ' +
-    '"O3" : { "X" : 44, "S" : "Baz" }, "AoS" : ["Foo", "Bar"], "AoI" : [42, 1] }', Json);
+  Assert.AreEqual('{"B":true,"I8":-128,"I16":-32768,"I32":-2147483648,' +
+    '"I64":NumberLong("-9223372036854775808"),"U8":255,"U16":65535,' +
+    '"U32":-1,"U64":NumberLong(-1),"F32":1.49999994701334E30,' +
+    '"F64":-1.5E300,"C":"\r","S":"Foo","DT":ISODate("2016-05-01T15:28:57.784Z"),' +
+    '"G":UUID("01020304-0506-0708-090a-0b0c0d0e0f10"),' +
+    '"Oid":ObjectId("0102030405060708090a0b0c"),' +
+    '"BA":new BinData(0,"AQIDBAUGBwgJ"),"E":1,"St":3,' +
+    '"R":{"X":42,"S":"Foo"},"O1":null,"O2":{"X":43,"S":"Bar"},' +
+    '"O3":{"X":44,"S":"Baz"},"AoS":["Foo","Bar"],"AoI":[42,1]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Rehydrated := nil;
@@ -3700,9 +3700,9 @@ begin
   Rehydrated := nil;
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Employee, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "EmployeeId" : ObjectId("0102030405060708090a0b0c"), ' +
-    '"FirstName" : "John", "LastName" : "Smith", ' +
-    '"DateOfBirth" : ISODate("2001-02-03T00:00:00Z") }', Json);
+  Assert.AreEqual('{"EmployeeId":ObjectId("0102030405060708090a0b0c"),' +
+    '"FirstName":"John","LastName":"Smith",' +
+    '"DateOfBirth":ISODate("2001-02-03T00:00:00Z")}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Employee, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3734,8 +3734,8 @@ begin
   Rehydrated := nil;
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Order, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "Customer" : "John", "OrderDetails" : ' +
-    '[{ "Product" : "Pen", "Quantity" : 1 }, { "Product" : "Ruler", "Quantity" : 2 }] }', Json);
+  Assert.AreEqual('{"Customer":"John","OrderDetails":' +
+    '[{"Product":"Pen","Quantity":1},{"Product":"Ruler","Quantity":2}]}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Order, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3781,7 +3781,7 @@ begin
   A.FA := 'a';
   (A as TC).FC := 'c';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(A, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "_t" : "ClassC", "FA" : "a", "FC" : "c" }', Json);
+  Assert.AreEqual('{"_t":"ClassC","FA":"a","FC":"c"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(A, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3806,7 +3806,7 @@ begin
   C.FA := 'a';
   C.FC := 'c';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(C, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "FA" : "a", "FC" : "c" }', Json);
+  Assert.AreEqual('{"FA":"a","FC":"c"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(C, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3834,7 +3834,7 @@ begin
   (A as TD).FB := 'b';
   (A as TD).FD := 'd';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(A, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "_t" : "TestBsonPolymorphicClasses.TD", "FA" : "a", "FB" : "b", "FD" : "d" }', Json);
+  Assert.AreEqual('{"_t":"TestBsonPolymorphicClasses.TD","FA":"a","FB":"b","FD":"d"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(A, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3862,7 +3862,7 @@ begin
   (B as TD).FB := 'b';
   (B as TD).FD := 'd';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(B, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "_t" : "TestBsonPolymorphicClasses.TD", "FA" : "a", "FB" : "b", "FD" : "d" }', Json);
+  Assert.AreEqual('{"_t":"TestBsonPolymorphicClasses.TD","FA":"a","FB":"b","FD":"d"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(B, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3888,7 +3888,7 @@ begin
   D.FB := 'b';
   D.FD := 'd';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(D, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "_t" : "TestBsonPolymorphicClasses.TD", "FA" : "a", "FB" : "b", "FD" : "d" }', Json);
+  Assert.AreEqual('{"_t":"TestBsonPolymorphicClasses.TD","FA":"a","FB":"b","FD":"d"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(D, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3916,7 +3916,7 @@ begin
   (A as TE).FB := 'b';
   (A as TE).FE := 'e';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(A, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "_t" : "TestBsonPolymorphicClasses.TE", "FA" : "a", "FB" : "b", "FE" : "e" }', Json);
+  Assert.AreEqual('{"_t":"TestBsonPolymorphicClasses.TE","FA":"a","FB":"b","FE":"e"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(A, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3944,7 +3944,7 @@ begin
   (B as TE).FB := 'b';
   (B as TE).FE := 'e';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(B, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "_t" : "TestBsonPolymorphicClasses.TE", "FA" : "a", "FB" : "b", "FE" : "e" }', Json);
+  Assert.AreEqual('{"_t":"TestBsonPolymorphicClasses.TE","FA":"a","FB":"b","FE":"e"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(B, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3970,7 +3970,7 @@ begin
   E.FB := 'b';
   E.FE := 'e';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(E, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "_t" : "TestBsonPolymorphicClasses.TE", "FA" : "a", "FB" : "b", "FE" : "e" }', Json);
+  Assert.AreEqual('{"_t":"TestBsonPolymorphicClasses.TE","FA":"a","FB":"b","FE":"e"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(E, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -3993,7 +3993,7 @@ begin
 
   T := TT.Create;
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(T, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "FT" : null }', Json);
+  Assert.AreEqual('{"FT":null}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(T, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -4020,7 +4020,7 @@ begin
   T.FT.FA := 'a';
   TC(T.FT).FC := 'c';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(T, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "FT" : { "_t" : "ClassC", "FA" : "a", "FC" : "c" } }', Json);
+  Assert.AreEqual('{"FT":{"_t":"ClassC","FA":"a","FC":"c"}}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(T, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -4049,7 +4049,7 @@ begin
   TD(T.FT).FB := 'b';
   TD(T.FT).FD := 'd';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(T, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "FT" : { "_t" : "TestBsonPolymorphicClasses.TD", "FA" : "a", "FB" : "b", "FD" : "d" } }', Json);
+  Assert.AreEqual('{"FT":{"_t":"TestBsonPolymorphicClasses.TD","FA":"a","FB":"b","FD":"d"}}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(T, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -4078,7 +4078,7 @@ begin
   TE(T.FT).FB := 'b';
   TE(T.FT).FE := 'e';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(T, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "FT" : { "_t" : "TestBsonPolymorphicClasses.TE", "FA" : "a", "FB" : "b", "FE" : "e" } }', Json);
+  Assert.AreEqual('{"FT":{"_t":"TestBsonPolymorphicClasses.TE","FA":"a","FB":"b","FE":"e"}}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(T, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -4095,7 +4095,7 @@ end;
 
 procedure TestBsonPolymorphicClasses.TestUnknownDiscriminator;
 const
-  JSON = '{ "_t" : "ClassD", "FA" : "a", "FB" : "b", "FD" : "d" }';
+  JSON = '{"_t":"ClassD", "FA":"a", "FB":"b", "FD":"d"}';
 begin
   Assert.WillRaise(
     procedure
@@ -4128,7 +4128,7 @@ begin
   Foo.Child.Value := 2;
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Foo, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "Value" : 1, "Child" : { "Value" : 2, "Child" : null } }', Json);
+  Assert.AreEqual('{"Value":1,"Child":{"Value":2,"Child":null}}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Foo, Bson));
 
@@ -4172,7 +4172,7 @@ begin
   Obj.FieldNormalElementName := 'FNEN';
   Obj.FieldAltElementName := 'FAEN';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Obj, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "FieldNormalElementName" : "FNEN", "#alt" : "FAEN", "PropNormalElementName" : "PNEN", "$alt" : "PAEN" }', Json);
+  Assert.AreEqual('{"FieldNormalElementName":"FNEN","#alt":"FAEN","PropNormalElementName":"PNEN","$alt":"PAEN"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Obj, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -4195,9 +4195,9 @@ begin
   Obj.I := 42;
   Obj.S := 'Foo';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Obj, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "I" : 42, "S" : "Foo" }', Json);
+  Assert.AreEqual('{"I":42,"S":"Foo"}', Json);
 
-  Json := '{ "I" : 42, "S" : "Foo", "Extra" : true }';
+  Json := '{"I":42, "S":"Foo", "Extra":true}';
   try
     Assert.WillRaise(
       procedure
@@ -4223,7 +4223,7 @@ begin
   Obj.FieldNormal := 'FN';
   Obj.FieldIgnore := 'FI';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Obj, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "FieldNormal" : "FN", "PropNormal" : "PN" }', Json);
+  Assert.AreEqual('{"FieldNormal":"FN","PropNormal":"PN"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Obj, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -4246,14 +4246,14 @@ begin
   Obj.I := 42;
   Obj.S := 'Foo';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Obj, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "_t" : "TCIEE", "I" : 42, "S" : "Foo" }', Json);
+  Assert.AreEqual('{"_t":"TCIEE","I":42,"S":"Foo"}', Json);
 
-  Json := '{ "_t" : "TCIEE", "I" : 42, "S" : "Foo", "Extra" : true }';
+  Json := '{"_t":"TCIEE", "I":42, "S":"Foo", "Extra":true}';
   TgoBsonSerializer.Deserialize(Json, Rehydrated); // Should not raise an exception
 
   Assert.IsTrue(Rehydrated.ClassType = TTestClassIgnoreExtraElements);
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Rehydrated, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "_t" : "TCIEE", "I" : 42, "S" : "Foo" }', Json);
+  Assert.AreEqual('{"_t":"TCIEE","I":42,"S":"Foo"}', Json);
 
   Obj.Free;
   Rehydrated.Free;
@@ -4356,41 +4356,41 @@ begin
   Obj.PropIgnoreObjectId2 := TgoObjectId.Create('5734c5688a057d1924e552cf');
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Obj, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ ' +
-    '"FieldIgnoreDefaultBoolean2" : true, ' +
-    '"FieldIgnoreCustomDefaultBoolean1" : false, ' +
-    '"FieldIgnoreDefaultInt32_2" : 42, ' +
-    '"FieldIgnoreCustomDefaultInt32_1" : 0, ' +
-    '"FieldIgnoreDefaultInt64_2" : NumberLong(-42), ' +
-    '"FieldIgnoreCustomDefaultInt64_1" : NumberLong(0), ' +
-    '"FieldIgnoreDefaultString2" : "Foo", ' +
-    '"FieldIgnoreCustomDefaultString1" : "", ' +
-    '"FieldIgnoreDouble2" : 1.5, ' +
-    '"FieldIgnoreDateTime2" : ISODate("2016-05-12T00:00:00Z"), ' +
-    '"FieldIgnoreEnum2" : 1, ' +
-    '"FieldIgnoreSet2" : 6, ' +
-    '"FieldIgnoreBytes2" : new BinData(0, "AQID"), ' +
-    '"FieldIgnoreArray2" : ["Foo", "Bar"], ' +
-    '"FieldIgnoreObject2" : { "Id" : 42 }, ' +
-    '"FieldIgnoreGuid2" : UUID("e898e713-23fb-4b92-a46f-0d5b7e3deb62"), ' +
-    '"FieldIgnoreObjectId2" : ObjectId("5734c5688a057d1924e552cf"), ' +
-    '"PropIgnoreDefaultBoolean2" : true, ' +
-    '"PropIgnoreCustomDefaultBoolean1" : false, ' +
-    '"PropIgnoreDefaultInt32_2" : 42, ' +
-    '"PropIgnoreCustomDefaultInt32_1" : 0, ' +
-    '"PropIgnoreDefaultInt64_2" : NumberLong(-42), ' +
-    '"PropIgnoreCustomDefaultInt64_1" : NumberLong(0), ' +
-    '"PropIgnoreDefaultString2" : "Foo", ' +
-    '"PropIgnoreCustomDefaultString1" : "", ' +
-    '"PropIgnoreDouble2" : 1.5, ' +
-    '"PropIgnoreDateTime2" : ISODate("2016-05-12T00:00:00Z"), ' +
-    '"PropIgnoreEnum2" : 1, ' +
-    '"PropIgnoreSet2" : 6, ' +
-    '"PropIgnoreBytes2" : new BinData(0, "AQID"), ' +
-    '"PropIgnoreArray2" : ["Foo", "Bar"], ' +
-    '"PropIgnoreObject2" : { "Id" : 42 }, ' +
-    '"PropIgnoreGuid2" : UUID("e898e713-23fb-4b92-a46f-0d5b7e3deb62"), ' +
-    '"PropIgnoreObjectId2" : ObjectId("5734c5688a057d1924e552cf") }', Json);
+  Assert.AreEqual('{' +
+    '"FieldIgnoreDefaultBoolean2":true,' +
+    '"FieldIgnoreCustomDefaultBoolean1":false,' +
+    '"FieldIgnoreDefaultInt32_2":42,' +
+    '"FieldIgnoreCustomDefaultInt32_1":0,' +
+    '"FieldIgnoreDefaultInt64_2":NumberLong(-42),' +
+    '"FieldIgnoreCustomDefaultInt64_1":NumberLong(0),' +
+    '"FieldIgnoreDefaultString2":"Foo",' +
+    '"FieldIgnoreCustomDefaultString1":"",' +
+    '"FieldIgnoreDouble2":1.5,' +
+    '"FieldIgnoreDateTime2":ISODate("2016-05-12T00:00:00Z"),' +
+    '"FieldIgnoreEnum2":1,' +
+    '"FieldIgnoreSet2":6,' +
+    '"FieldIgnoreBytes2":new BinData(0,"AQID"),' +
+    '"FieldIgnoreArray2":["Foo","Bar"],' +
+    '"FieldIgnoreObject2":{"Id":42},' +
+    '"FieldIgnoreGuid2":UUID("e898e713-23fb-4b92-a46f-0d5b7e3deb62"),' +
+    '"FieldIgnoreObjectId2":ObjectId("5734c5688a057d1924e552cf"),' +
+    '"PropIgnoreDefaultBoolean2":true,' +
+    '"PropIgnoreCustomDefaultBoolean1":false,' +
+    '"PropIgnoreDefaultInt32_2":42,' +
+    '"PropIgnoreCustomDefaultInt32_1":0,' +
+    '"PropIgnoreDefaultInt64_2":NumberLong(-42),' +
+    '"PropIgnoreCustomDefaultInt64_1":NumberLong(0),' +
+    '"PropIgnoreDefaultString2":"Foo",' +
+    '"PropIgnoreCustomDefaultString1":"",' +
+    '"PropIgnoreDouble2":1.5,' +
+    '"PropIgnoreDateTime2":ISODate("2016-05-12T00:00:00Z"),' +
+    '"PropIgnoreEnum2":1,' +
+    '"PropIgnoreSet2":6,' +
+    '"PropIgnoreBytes2":new BinData(0,"AQID"),' +
+    '"PropIgnoreArray2":["Foo","Bar"],' +
+    '"PropIgnoreObject2":{"Id":42},' +
+    '"PropIgnoreGuid2":UUID("e898e713-23fb-4b92-a46f-0d5b7e3deb62"),' +
+    '"PropIgnoreObjectId2":ObjectId("5734c5688a057d1924e552cf")}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Obj, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
@@ -4415,13 +4415,13 @@ begin
   Obj.FPropReadOnlyExclude := 'ROE';
   Obj.FPropReadOnlyIncludeAltName := 'ROIAN';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Obj, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "PropReadOnlyInclude" : "ROI", "AltName" : "ROIAN" }', Json);
+  Assert.AreEqual('{"PropReadOnlyInclude":"ROI","AltName":"ROIAN"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Obj, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(Rehydrated, Actual));
-  Assert.AreEqual('{ "PropReadOnlyInclude" : "", "AltName" : "" }', Actual);
+  Assert.AreEqual('{"PropReadOnlyInclude":"","AltName":""}', Actual);
 
   Obj.Free;
   Rehydrated.Free;
@@ -4482,7 +4482,7 @@ begin
   R.Id.Part1 := 'abc';
   R.Id.Part2 := 'def';
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, TgoJsonWriterSettings.Shell, Json));
-  Assert.AreEqual('{ "Id" : "abc:def" }', Json);
+  Assert.AreEqual('{"Id":"abc:def"}', Json);
 
   Assert.IsTrue(TgoBsonSerializer.TrySerialize(R, Bson));
   Assert.IsTrue(TgoBsonSerializer.TryDeserialize(Bson, Rehydrated));
