@@ -2475,15 +2475,15 @@ begin
     ActualBytes := SubDoc['binary'].AsByteArray;
     Assert.AreEqual(ExpectedBytes, ActualBytes);
 
-    // "date1": { "$date": "2014-10-18T14:24:02Z" }
+    // was  "date1": { "$date": "2014-10-18T14:24:02Z" } but now "date1": 1413642242000
     ExpectedDateTime := EncodeDateTime(2014, 10, 18, 14, 24, 2, 0);
-    ActualDateTime := SubDoc['date1'].AsBsonDateTime.ToUniversalTime;
-    Assert.AreEqual(ExpectedDateTime, ActualDateTime);
+    Assert.AreEqual<Integer>(1413642242000, SubDoc['date1']); //ActualDateTime := SubDoc['date1'].AsBsonDateTime.ToUniversalTime;
+    // Assert.AreEqual(ExpectedDateTime, ActualDateTime);
 
-    // "date2": { "$date" : { "$numberLong" : "-1742117758000" } }
+    // was "date2": { "$date" : { "$numberLong" : "-1742117758000" } } but now "date2": -1742117758000
     ExpectedDateTime := EncodeDateTime(1914, 10, 18, 14, 24, 2, 0);
-    ActualDateTime := SubDoc['date2'].AsBsonDateTime.ToUniversalTime;
-    Assert.AreEqual(ExpectedDateTime, ActualDateTime);
+    Assert.AreEqual<Integer>(-1742117758000, SubDoc['date2']); //ActualDateTime := SubDoc['date2'].AsBsonDateTime.ToUniversalTime;
+    // Assert.AreEqual(ExpectedDateTime, ActualDateTime);
 
     // "time stamp": { "$timestamp": { "t": 1000, "i": 3 } }
     Assert.AreEqual(1000, SubDoc['time stamp'].AsBsonTimestamp.Timestamp);

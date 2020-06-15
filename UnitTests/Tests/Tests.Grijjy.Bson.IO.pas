@@ -1731,8 +1731,6 @@ begin
 end;
 
 procedure TestJsonWriter.TestDateTimeStrict;
-var
-  DT: TDateTime;
 
   procedure Test(const AValue: TgoBsonDateTime; const AExpected: String);
   var
@@ -1743,20 +1741,22 @@ var
     Json := AValue.ToJson;
     Assert.AreEqual(AExpected, Json);
 
-    Reader := TgoJsonReader.Create(Json);
+    Reader := TgoJsonReader.Create('{"$date":' + Json + '}');
     Actual := Reader.ReadValue;
 
     Assert.AreEqual(AValue.MillisecondsSinceEpoch, Actual.AsBsonDateTime.MillisecondsSinceEpoch);
   end;
 
+var
+  DT: TDateTime;
 begin
-  Test(TgoBsonDateTime.Create(Int64.MinValue), '-9223372036854775808'); // {"$date":-9223372036854775808}
-  Test(TgoBsonDateTime.Create(0), '{"$date":0}');
-  Test(TgoBsonDateTime.Create(Int64.MaxValue), '{"$date":9223372036854775807}');
-  Test(TgoBsonDateTime.Create(UnixDateDelta, True), '{"$date":0}');
+  Test(TgoBsonDateTime.Create(Int64.MinValue), '-9223372036854775808'); // was {"$date":-9223372036854775808}
+  Test(TgoBsonDateTime.Create(0), '0'); // was {"$date":0}
+  Test(TgoBsonDateTime.Create(Int64.MaxValue), '9223372036854775807'); // was {"$date":9223372036854775807}
+  Test(TgoBsonDateTime.Create(UnixDateDelta, True), '0'); // was {"$date":0}
 
   DT := EncodeDateTime(2014, 4, 22, 10, 7, 23, 123);
-  Test(TgoBsonDateTime.Create(DT, True), '{"$date":1398161243123}');
+  Test(TgoBsonDateTime.Create(DT, True), '1398161243123'); // {"$date":1398161243123}
 end;
 
 procedure TestJsonWriter.TestDouble;
