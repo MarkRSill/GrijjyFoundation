@@ -1954,6 +1954,8 @@ begin
       begin
         DT := TgoBsonDateTime.Create(AReader.ReadDateTime);
         Result := DT.ToUniversalTime;
+        if AInfo.DateTimeAsUTC then
+          Result := TTimeZone.Local.ToLocalTime(Result);
       end;
 
     TgoBsonType.Document:
@@ -1980,6 +1982,8 @@ begin
           Result := UnixToDateTime(UnixDateTime, True)
         else
           Result := goToDateTimeFromMillisecondsSinceEpoch(UnixDateTime, True);
+        if AInfo.DateTimeAsUTC then
+          Result := TTimeZone.Local.ToLocalTime(Result);
       end;
 
     TgoBsonType.Int32:
@@ -1991,9 +1995,8 @@ begin
     TgoBsonType.String:
       begin
         DateString := AReader.ReadString;
+        returnLocal := not AInfo.DateTimeAsUTC;
         try
-          returnLocal := not AInfo.DateTimeAsUTC;
-
           if DateString > '' then
             Result := ISO8601ToDate(DateString, returnLocal{True})
           else
@@ -2688,7 +2691,10 @@ begin
   case AInfo.Representation of
     TgoBsonRepresentation.DateTime:
       begin
-        MS := goDateTimeToMillisecondsSinceEpoch(AValue, True);
+        if AInfo.DateTimeAsUTC then
+          MS := goDateTimeToMillisecondsSinceEpoch(AValue, False) //TODO: Determine if there is a need to trap Invalid DST time
+        else
+          MS := goDateTimeToMillisecondsSinceEpoch(AValue, True);
         AWriter.WriteDateTime(MS);
       end;
 
