@@ -2720,7 +2720,7 @@ begin
           S := FormatDateTime('yyyy-mm-dd"T"hh:nn:ss', AValue, goUSFormatSettings);
         MS := MilliSecondOf(AValue);
         if (MS <> 0) then
-          S := S + '.' + IntToStr(MS * 10000);
+          S := S + '.' + MS.ToString.SubString(0, 7);
         if AInfo.DateTimeAsUTC then
           S := S + 'Z';
         AWriter.WriteString(S);
